@@ -1,0 +1,27 @@
+GET http://127.0.0.1:8081/api/v1/user
+
+### guardar user
+POST http://127.0.0.1:8081/api/v1/user
+Content-Type: application/json
+
+{
+    "name": "abraham",
+    "email": "abraham@mail.com",
+    "password": "123456"
+}
+
+### modificar user
+PUT http://127.0.0.1:8081/api/v1/user/1
+Content-Type: application/json
+
+{
+    "name": "abraham modificado",
+    "email": "abraham.modificado@gmail.com",
+    "password": "admin123"
+}
+
+### buscar por id
+GET http://localhost:8081/api/v1/user/1
+
+### eliminar user 1
+DELETE  http://127.0.0.1:8081/api/user/1

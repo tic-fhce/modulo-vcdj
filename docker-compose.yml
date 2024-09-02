@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  sgdf-back:
+    build: sgdfback
+    mem_limit: 512m
+    ports:
+      - "8081:8081"
+    environment:
+      DB_URL: jdbc:mysql://sgd_back:3306/sgd?createDatabaseIfNotExist=true&serverTimezone=UTC
+      DB_USER_NAME: root
+      DB_PASSWORD: 1234
+    restart: always
+    depends_on:
+      sgd_back:
+          condition: service_healthy
+    volumes:
+      - ./uploads:/app/uploads
+  sgd_back:
+    image: mysql:8.0.33 
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_PASSWORD: 1234
+      MYSQL_DATABASE: sgd
+    restart: always
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 10s
+      retries: 10
+    volumes:
+      - ./sgd.sql:/docker-entrypoint-initdb.d/sgd.sql
