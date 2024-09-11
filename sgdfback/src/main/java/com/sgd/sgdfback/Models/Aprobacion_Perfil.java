@@ -29,6 +29,7 @@ public class Aprobacion_Perfil {
     private Long cif;
     private String modalidad;
     private String titulo;
+    private String tutor;
     
     private String d_nota_director;
     private String d_nota_tutor;
@@ -52,6 +53,9 @@ public class Aprobacion_Perfil {
 
     @OneToMany(mappedBy = "aprobacion_Perfil")
     private List<Designacion_Tribunal> designacion_Tribunals;
+
+    @OneToMany(mappedBy = "aprobacion_Perfil")
+    private List<Cambio_Modalidad> cambio_Modalidads;
 
     @ManyToOne
     @JoinColumn(name = "tramite_id")

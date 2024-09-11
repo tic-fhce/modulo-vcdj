@@ -8,6 +8,7 @@ C:\Users\USUARIO\Documents\INF-399\SPRING - VUE JS\sgdf-back\sgdfback\src\main\j
 C:\Users\USUARIO\Documents\INF-399\SPRING - VUE JS\sgdf-back\sgdfback\src\main\java\com\sgd\sgdfback\Controller\MateriaExtra\materiaExtraController.java
 C:\Users\USUARIO\Documents\INF-399\SPRING - VUE JS\sgdf-back\sgdfback\src\main\java\com\sgd\sgdfback\Models\Seguimiento.java
 C:\Users\USUARIO\Documents\INF-399\SPRING - VUE JS\sgdf-back\sgdfback\src\main\java\com\sgd\sgdfback\Controller\_07_Document\documentController.java
+C:\Users\USUARIO\Documents\INF-399\SPRING - VUE JS\sgdf-back\sgdfback\src\main\java\com\sgd\sgdfback\Controller\CambioModalidad\cambioModalidadController.java
 C:\Users\USUARIO\Documents\INF-399\SPRING - VUE JS\sgdf-back\sgdfback\src\main\java\com\sgd\sgdfback\Controller\Certificado_Unico\certificadoUnicoController.java
 C:\Users\USUARIO\Documents\INF-399\SPRING - VUE JS\sgdf-back\sgdfback\src\main\java\com\sgd\sgdfback\Controller\_04_Seguimiento\SeguimientoService.java
 C:\Users\USUARIO\Documents\INF-399\SPRING - VUE JS\sgdf-back\sgdfback\src\main\java\com\sgd\sgdfback\Controller\_02_User\UserController.java
@@ -43,6 +44,7 @@ C:\Users\USUARIO\Documents\INF-399\SPRING - VUE JS\sgdf-back\sgdfback\src\main\j
 C:\Users\USUARIO\Documents\INF-399\SPRING - VUE JS\sgdf-back\sgdfback\src\main\java\com\sgd\sgdfback\Models\Aprobacion_Perfil.java
 C:\Users\USUARIO\Documents\INF-399\SPRING - VUE JS\sgdf-back\sgdfback\src\main\java\com\sgd\sgdfback\Configurations\Jwt\JwtAuthenticationFilter.java
 C:\Users\USUARIO\Documents\INF-399\SPRING - VUE JS\sgdf-back\sgdfback\src\main\java\com\sgd\sgdfback\Controller\Convalidacion02\convalidacion02Controller.java
+C:\Users\USUARIO\Documents\INF-399\SPRING - VUE JS\sgdf-back\sgdfback\src\main\java\com\sgd\sgdfback\Controller\CambioModalidad\cambioModalidadRepository.java
 C:\Users\USUARIO\Documents\INF-399\SPRING - VUE JS\sgdf-back\sgdfback\src\main\java\com\sgd\sgdfback\Models\Flujo.java
 C:\Users\USUARIO\Documents\INF-399\SPRING - VUE JS\sgdf-back\sgdfback\src\main\java\com\sgd\sgdfback\Configurations\Jwt\JwtService.java
 C:\Users\USUARIO\Documents\INF-399\SPRING - VUE JS\sgdf-back\sgdfback\src\main\java\com\sgd\sgdfback\Controller\AlumnoLibre\alumnoLibreController.java
@@ -89,6 +91,7 @@ C:\Users\USUARIO\Documents\INF-399\SPRING - VUE JS\sgdf-back\sgdfback\src\main\j
 C:\Users\USUARIO\Documents\INF-399\SPRING - VUE JS\sgdf-back\sgdfback\src\main\java\com\sgd\sgdfback\Controller\_04_Seguimiento\SeguimientoRepository.java
 C:\Users\USUARIO\Documents\INF-399\SPRING - VUE JS\sgdf-back\sgdfback\src\main\java\com\sgd\sgdfback\Controller\_02_User\UserService.java
 C:\Users\USUARIO\Documents\INF-399\SPRING - VUE JS\sgdf-back\sgdfback\src\main\java\com\sgd\sgdfback\Models\Role.java
+C:\Users\USUARIO\Documents\INF-399\SPRING - VUE JS\sgdf-back\sgdfback\src\main\java\com\sgd\sgdfback\Controller\CambioModalidad\cambioModalidadService.java
 C:\Users\USUARIO\Documents\INF-399\SPRING - VUE JS\sgdf-back\sgdfback\src\main\java\com\sgd\sgdfback\Controller\document\QRCodeController.java
 C:\Users\USUARIO\Documents\INF-399\SPRING - VUE JS\sgdf-back\sgdfback\src\main\java\com\sgd\sgdfback\Controller\_07_Document\documentService.java
 C:\Users\USUARIO\Documents\INF-399\SPRING - VUE JS\sgdf-back\sgdfback\src\main\java\com\sgd\sgdfback\Controller\_01_Auth\AuthResponse.java
