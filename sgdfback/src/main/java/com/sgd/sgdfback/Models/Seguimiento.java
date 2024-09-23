@@ -24,8 +24,8 @@ public class Seguimiento {
     private String estado;
     private String comentario;
     private String carrera;
-    @Column(columnDefinition = "VARCHAR(6) DEFAULT 'true'")
-    private String activo;
+    @Column(columnDefinition = "VARCHAR(6) DEFAULT 'false'")
+    private String visto;
     private LocalDateTime tiempo;
 
     @ManyToOne

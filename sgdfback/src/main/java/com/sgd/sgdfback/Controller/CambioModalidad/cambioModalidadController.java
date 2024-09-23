@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -18,7 +16,6 @@ import lombok.AllArgsConstructor;
 public class cambioModalidadController {
 
     private final cambioModalidadService cambioS;
-    private final ObjectMapper objectMapper;
 
     @PostMapping("/actualizar")
     public ResponseEntity<String> actualizar(@RequestBody Map<String, String> data) {
@@ -44,18 +41,6 @@ public class cambioModalidadController {
         String nroTramite = data.get("nrotramite");
         Map<String, Object> resultado = cambioS.obtenerTodoPorTramiteId(nroTramite);
         return ResponseEntity.ok(resultado);
-    }
-
-
-    private String convertToJsonResponse(List<Map<String, Object>> list) {
-        String jsonResult = null;
-        try {
-            jsonResult = objectMapper.writeValueAsString(list);
-        } catch (Exception e) {
-            e.printStackTrace(); // Manejo de errores
-            jsonResult = "Error al convertir a JSON";
-        }
-        return jsonResult;
     }
 
 }

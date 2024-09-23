@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-09-2024 a las 09:18:12
+-- Tiempo de generación: 23-09-2024 a las 03:27:23
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.0.28
 
@@ -76,6 +76,14 @@ CREATE TABLE `aprobacion_perfil` (
   `r_record_academico` varchar(255) DEFAULT NULL,
   `tutor` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `aprobacion_perfil`
+--
+
+INSERT INTO `aprobacion_perfil` (`id`, `tramite_id`, `user_id`, `modalidad`, `titulo`, `cif`, `c_proyecto_resolucion_perfil`, `c_resolucion_perfil`, `c_solicitud_aprobacion_perfil`, `d_carta_institucion`, `d_conclusion_estudios`, `d_nota_director`, `d_nota_tutor`, `d_perfil_grado`, `d_proyecto_resolucion_perfil`, `d_record_academico`, `d_resolucion_perfil`, `d_solicitud_aprobacion_perfil`, `r_carta_institucion`, `r_conclusion_estudios`, `r_nota_director`, `r_nota_tutor`, `r_perfil_grado`, `r_record_academico`, `tutor`) VALUES
+(9, 'FHCE-PSI-41', 8, 'Tesis', 'xxxxxxxxxxxxxxxxxxxxxxxx', NULL, '1GRfA9eQ_5Qn8L2S27CHcaotxh84Ueakv', '1sw6ARDrTjRlGXu-wKKTiOFimhIK1390D', '1rpft0aw3on4pDP4eeuiffT7b9XBOXLFV', NULL, 'conclusion_estudios.pdf', 'nota_director.pdf', 'nota_tutor.pdf', 'perfil_grado.pdf', 'proyecto_resolucion_perfil.pdf', 'record_academico.pdf', 'resolucion_perfil.pdf', 'solicitud_aprobacion_perfil.pdf', NULL, 'correcto', 'correcto', 'correcto', 'correcto', 'correcto', NULL),
+(10, 'FHCE-PSI-42', 8, 'Proyecto de Grado', 'zzzzzzzzzzzzzzz', NULL, NULL, NULL, NULL, 'carta_institucion.pdf', 'conclusion_estudios.pdf', 'nota_director.pdf', 'nota_tutor.pdf', 'perfil_grado.pdf', NULL, 'record_academico.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -709,12 +717,29 @@ CREATE TABLE `seguimiento` (
   `fecha_inicio` datetime(6) DEFAULT NULL,
   `carrera` varchar(255) DEFAULT NULL,
   `estado` varchar(255) DEFAULT NULL,
-  `activo` varchar(6) DEFAULT 'true',
   `comentario` varchar(255) DEFAULT NULL,
   `role_id` int(11) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
-  `tiempo` datetime(6) DEFAULT NULL
+  `tiempo` datetime(6) DEFAULT NULL,
+  `visto` varchar(6) DEFAULT 'false'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `seguimiento`
+--
+
+INSERT INTO `seguimiento` (`id`, `tramite_id`, `flujo`, `proceso`, `fecha_fin`, `fecha_inicio`, `carrera`, `estado`, `comentario`, `role_id`, `user_id`, `tiempo`, `visto`) VALUES
+(1, 'FHCE-PSI-41', 'F17', 'P1', '2024-09-18 23:30:23.000000', '2024-09-18 23:29:51.000000', 'PSI', 'terminado', '', 7, 8, '2024-09-19 11:29:51.000000', 'false'),
+(2, 'FHCE-PSI-41', 'F17', 'P2', '2024-09-18 23:31:08.000000', '2024-09-18 23:30:23.000000', 'PSI', 'terminado', '', 3, 3, '2024-09-19 11:30:23.000000', 'false'),
+(3, 'FHCE-PSI-41', 'F17', 'P3', '2024-09-21 06:55:23.000000', '2024-09-18 23:31:08.000000', 'PSI', 'terminado', '', 11, 14, '2024-09-19 11:31:08.000000', 'false'),
+(4, 'FHCE-PSI-41', 'F17', 'P4', '2024-09-21 06:56:16.000000', '2024-09-21 06:55:23.000000', 'PSI', 'terminado', '', 3, 3, '2024-09-21 18:55:23.000000', 'false'),
+(5, 'FHCE-PSI-41', 'F17', 'P5', '2024-09-21 08:33:05.000000', '2024-09-21 06:56:16.000000', 'FHCE', 'terminado', '', 2, 2, '2024-09-21 18:56:16.000000', 'false'),
+(6, 'FHCE-PSI-42', 'F17', 'P1', '2024-09-21 08:22:55.000000', '2024-09-21 08:22:22.000000', 'PSI', 'terminado', '', 7, 8, '2024-09-21 20:22:22.000000', 'false'),
+(7, 'FHCE-PSI-42', 'F17', 'P2', '2024-09-21 08:23:12.000000', '2024-09-21 08:22:55.000000', 'PSI', 'terminado', '', 3, 3, '2024-09-21 20:22:55.000000', 'false'),
+(8, 'FHCE-PSI-42', 'F17', 'P3', NULL, '2024-09-21 08:23:12.000000', 'PSI', 'pendiente', '', 11, 14, '2024-09-21 20:23:12.000000', 'false'),
+(9, 'FHCE-PSI-41', 'F17', 'P6', '2024-09-21 23:06:48.000000', '2024-09-21 08:33:05.000000', 'FHCE', 'terminado', '', 1, 1, '2024-09-21 20:33:05.000000', 'true'),
+(10, 'FHCE-PSI-41', 'F17', 'P7', '2024-09-21 23:07:11.000000', '2024-09-21 23:06:48.000000', 'PSI', 'terminado', '', 3, 3, '2024-09-22 11:06:48.000000', 'true'),
+(11, 'FHCE-PSI-41', 'F17', 'P8-Fin', '2024-09-21 23:07:11.000000', '2024-09-21 23:07:11.000000', 'PSI', 'terminado', '', 7, 8, '2024-09-22 11:07:11.000000', 'true');
 
 -- --------------------------------------------------------
 
@@ -732,6 +757,14 @@ CREATE TABLE `tramite` (
   `estado` varchar(50) DEFAULT 'pendiente',
   `creacion` datetime(6) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `tramite`
+--
+
+INSERT INTO `tramite` (`id`, `user_id`, `flujo`, `proceso`, `tipo`, `carrera`, `estado`, `creacion`) VALUES
+('FHCE-PSI-41', 8, 'F17', 'P8-Fin', 'APROBACIÓN DE PERFIL DE GRADO', 'PSI', 'terminado', '2024-09-18 23:29:51.000000'),
+('FHCE-PSI-42', 8, 'F17', 'P3', 'APROBACIÓN DE PERFIL DE GRADO', 'PSI', 'pendiente', '2024-09-21 08:22:22.000000');
 
 --
 -- Disparadores `tramite`
@@ -777,7 +810,7 @@ INSERT INTO `unidad` (`id`, `nombre`, `secuencia`) VALUES
 ('HIS', 'HISTORIA', 0),
 ('LIN', 'LINGUISTICA', 0),
 ('LIT', 'LITERATURA', 0),
-('PSI', 'PSICOLOGIA', 40),
+('PSI', 'PSICOLOGIA', 42),
 ('TUR', 'TURISMO', 0);
 
 -- --------------------------------------------------------
@@ -1016,7 +1049,7 @@ ALTER TABLE `alumno_libre`
 -- AUTO_INCREMENT de la tabla `aprobacion_perfil`
 --
 ALTER TABLE `aprobacion_perfil`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `cambio_modalidad`
@@ -1100,7 +1133,7 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT de la tabla `seguimiento`
 --
 ALTER TABLE `seguimiento`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `user`

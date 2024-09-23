@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import java.util.List;
 import java.util.Map;
 
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/seguimiento")
@@ -41,13 +42,30 @@ public class SeguimientoController {
         return convertToJsonResponse(concluidosList);
     }
 
-    @PostMapping("/quitarTramite")
-    public ResponseEntity<String> quitarTramite(@RequestBody Map<String, String> data) {
+    @GetMapping("/hojarutaAtendida")
+    public ResponseEntity<String> listarhojasrutaAtendidas(@AuthenticationPrincipal User user) {
+        List<Map<String, Object>> hrAtendidas = seguimientoService.listarHR(user.getId());
+        return convertToJsonResponse(hrAtendidas);
+    }
+
+    @GetMapping("/countTramitesPendientes")
+    public Integer countTramPend(@AuthenticationPrincipal User user) {
+        return seguimientoService.countTramitesPend(user.getId());
+    }
+
+    @GetMapping("/countTramitesConcluidos")
+    public Integer countTramConcl(@AuthenticationPrincipal User user) {
+        return seguimientoService.countTramitesConcl(user.getId());
+    }
+    
+
+    @PostMapping("/visto")
+    public ResponseEntity<String> visto(@RequestBody Map<String, String> data) {
         String flujo = data.get("flujo");
         String proceso = data.get("proceso");
         String nroTramite = data.get("nroTramite");
 
-        seguimientoService.quitarTramite(flujo, proceso, nroTramite);
+        seguimientoService.activateV(flujo, proceso, nroTramite);
         return ResponseEntity.ok("Actualizado");
     }
 
