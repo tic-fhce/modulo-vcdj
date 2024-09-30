@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.sgd.sgdfback.SgdfbackApplicationTests
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.438 s - in com.sgd.sgdfback.SgdfbackApplicationTests

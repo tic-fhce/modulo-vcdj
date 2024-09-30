@@ -1,0 +1,18 @@
+package com.sgd.sgdfback.model;
+
+public enum RolNombre {
+    ADMIN,
+    DECANATO,
+    VICEDECANATO,
+    DIRECCION,
+    KARDEX,
+    COORDINADOR_PREFA,
+    HCF,
+    DOCENTE,
+    ESTUDIANTE,
+    COMISION_CONVALIDACION,
+    CONSEJO_CARRERA,
+    ADMINISTRADOR,
+    VICERRECTORADO,
+    PERSONAL_DOCENTE,
+}

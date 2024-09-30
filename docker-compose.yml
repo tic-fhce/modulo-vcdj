@@ -2,7 +2,10 @@ version: '3'
 
 services:
   sgdf-back:
-    build: sgdfback
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sgdfback_app
     mem_limit: 512m
     ports:
       - "8081:8081"
@@ -13,11 +16,15 @@ services:
     restart: always
     depends_on:
       sgd_back:
-          condition: service_healthy
+        condition: service_healthy
     volumes:
       - ./uploads:/app/uploads
+    networks:
+      - sgdf-network
+
   sgd_back:
     image: mysql:8.0.33 
+    container_name: mysql_sgdback
     ports:
       - "3307:3306"
     environment:
@@ -26,8 +33,21 @@ services:
       MYSQL_DATABASE: sgd
     restart: always
     healthcheck:
-      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
       timeout: 10s
-      retries: 10
+      retries: 5
     volumes:
-      - ./sgd.sql:/docker-entrypoint-initdb.d/sgd.sql
+      - ./src/main/java/com/sgd/sgdfback/bd/sgd.sql:/docker-entrypoint-initdb.d/sgd.sql
+      - db_data:/var/lib/mysql 
+    networks:
+      - sgdf-network
+
+# Define la red compartida
+networks:
+  sgdf-network:
+    driver: bridge
+
+# Define el volumen persistente para la base de datos
+volumes:
+  db_data:
