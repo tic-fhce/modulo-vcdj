@@ -11,14 +11,15 @@ import org.springframework.web.bind.annotation.*;
 import com.sgd.sgdfback.model.DesignacionDocentesInterinos;
 import com.sgd.sgdfback.service.DesignacionDocenteInterinoService;
 
-import lombok.AllArgsConstructor;
-
-@AllArgsConstructor
 @RestController
 @RequestMapping("/api/designacionDocInterinos")
 public class DesignacionDocenteInterinoController {
 
     private final DesignacionDocenteInterinoService designacionService;
+
+    public DesignacionDocenteInterinoController(DesignacionDocenteInterinoService designacionDocenteInterinoService){
+        this.designacionService = designacionDocenteInterinoService;
+    }
 
     @PatchMapping("/actualizar")
     public ResponseEntity<String> actualizar(@RequestBody Map<String, String> data) {

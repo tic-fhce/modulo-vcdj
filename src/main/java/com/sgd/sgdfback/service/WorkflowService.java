@@ -4,21 +4,23 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sgd.sgdfback.dao.WorkflowDAO;
 import com.sgd.sgdfback.model.Usuario;
-import com.sgd.sgdfback.object.workflow.InicioRequest;
-import com.sgd.sgdfback.object.workflow.SiguienteFormRequest;
+import com.sgd.sgdfback.object.WorkflowSiguienteFormRequest;
+import com.sgd.sgdfback.object.WorkflowInicioRequest;
 
 @Service
 public class WorkflowService {
 
-    @Autowired
     private WorkflowDAO workflowRepository;
 
-    public List<Map<String, Object>> inicioFlujo(Usuario user, InicioRequest request) {
+    public WorkflowService(WorkflowDAO workflowRepository) {
+        this.workflowRepository = workflowRepository;
+    }
+
+    public List<Map<String, Object>> inicioFlujo(Usuario user, WorkflowInicioRequest request) {
         String flujo = request.getFlujo();
         String formulario = request.getFormulario();
         String comentario = "";
@@ -49,7 +51,7 @@ public class WorkflowService {
         return workflowRepository.datos_tramite_hr(nroTramite);
     }
 
-    public String siguienteFormulario(Usuario user, SiguienteFormRequest request) {
+    public String siguienteFormulario(Usuario user, WorkflowSiguienteFormRequest request) {
         String flujo = request.getFlujo();
         String proceso = request.getProceso();
         String tramiteId = request.getTramiteId();

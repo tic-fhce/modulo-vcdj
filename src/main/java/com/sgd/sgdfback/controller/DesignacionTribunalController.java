@@ -14,15 +14,17 @@ import com.sgd.sgdfback.model.DesignacionTribunal;
 import com.sgd.sgdfback.model.Usuario;
 import com.sgd.sgdfback.service.DesignacionTribunalService;
 
-import lombok.AllArgsConstructor;
-
-@AllArgsConstructor
 @RestController
 @RequestMapping("/api/designacionTribunal")
 public class DesignacionTribunalController {
 
     private final DesignacionTribunalService designacionService;
     private final ObjectMapper objectMapper;
+
+    public DesignacionTribunalController(DesignacionTribunalService designacionTribunalService, ObjectMapper objectMapper){
+        this.designacionService = designacionTribunalService;
+        this.objectMapper = objectMapper;
+    }
 
     @PatchMapping("/actualizar")
     public ResponseEntity<String> actualizar(@RequestBody Map<String, String> data) {

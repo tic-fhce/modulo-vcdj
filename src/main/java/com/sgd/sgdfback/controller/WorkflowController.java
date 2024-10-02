@@ -13,31 +13,33 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sgd.sgdfback.model.Usuario;
-import com.sgd.sgdfback.object.workflow.InicioRequest;
-import com.sgd.sgdfback.object.workflow.SiguienteFormRequest;
+import com.sgd.sgdfback.object.WorkflowSiguienteFormRequest;
+import com.sgd.sgdfback.object.WorkflowInicioRequest;
 import com.sgd.sgdfback.service.WorkflowService;
 
-import lombok.Data;
-
-@Data
 @RestController
 @RequestMapping("/api/workflow")
 public class WorkflowController {
 
     @Autowired
-    private WorkflowService workflowService;
+    private final WorkflowService workflowService;
     private final ObjectMapper objectMapper;
+
+    public WorkflowController(WorkflowService workflowService, ObjectMapper objectMapper){
+        this.workflowService = workflowService;
+        this.objectMapper = objectMapper;
+    }
 
     @PostMapping("/inicioFlujo")
     public ResponseEntity<String> inicioFlujo(@AuthenticationPrincipal Usuario user,
-            @RequestBody InicioRequest request) {
+            @RequestBody WorkflowInicioRequest request) {
         List<Map<String, Object>> list = workflowService.inicioFlujo(user, request);
         return convertToJsonResponse(list);
     }
 
     @PostMapping("/siguienteFormulario")
     public ResponseEntity<String> siguienteFormulario(@AuthenticationPrincipal Usuario user,
-            @RequestBody SiguienteFormRequest request) {
+            @RequestBody WorkflowSiguienteFormRequest request) {
         String response = workflowService.siguienteFormulario(user, request);
         return ResponseEntity.ok(response);
     }

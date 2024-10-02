@@ -7,13 +7,14 @@ import org.springframework.stereotype.Service;
 
 import com.sgd.sgdfback.dao.TramiteDAO;
 
-import lombok.RequiredArgsConstructor;
-
 @Service
-@RequiredArgsConstructor
 public class TramiteService {
 
     private final TramiteDAO tramiteRepository;
+
+    public TramiteService(TramiteDAO tramiteRepository) {
+        this.tramiteRepository = tramiteRepository;
+    }
 
     public List<Map<String, Object>> listarTramites() {
         return tramiteRepository.findAllTramites();

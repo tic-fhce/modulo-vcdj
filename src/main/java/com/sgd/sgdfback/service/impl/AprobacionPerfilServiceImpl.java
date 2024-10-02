@@ -6,17 +6,18 @@ import com.sgd.sgdfback.dao.AprobacionPerfilDAO;
 import com.sgd.sgdfback.model.AprobacionPerfil;
 import com.sgd.sgdfback.service.AprobacionPerfilService;
 
-import lombok.AllArgsConstructor;
-
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Optional;
 
-@AllArgsConstructor
 @Service
 public class AprobacionPerfilServiceImpl implements AprobacionPerfilService {
 
     private final AprobacionPerfilDAO aprobacionPerfilRepository;
+
+    public AprobacionPerfilServiceImpl(AprobacionPerfilDAO aprobacionPerfilDAO){
+        this.aprobacionPerfilRepository = aprobacionPerfilDAO;
+    }
 
     @Override
     public void actualizarColumna(String columna, String param, String nroTramite) {

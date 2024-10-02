@@ -1,4 +1,4 @@
-package com.sgd.sgdfback.object.auth;
+package com.sgd.sgdfback.object;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,8 +7,9 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class AuthResponse {
-    String token; 
+@NoArgsConstructor
+public class AuthLoginRequest {
+    String username;
+    String password; 
 }

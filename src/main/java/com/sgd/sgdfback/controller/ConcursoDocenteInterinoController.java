@@ -11,14 +11,15 @@ import org.springframework.web.bind.annotation.*;
 import com.sgd.sgdfback.model.ConcursoDocentesInterinos;
 import com.sgd.sgdfback.service.ConcursoDocenteInterinoService;
 
-import lombok.AllArgsConstructor;
-
-@AllArgsConstructor
 @RestController
 @RequestMapping("/api/concursoDocInterinos")
 public class ConcursoDocenteInterinoController {
 
     private final ConcursoDocenteInterinoService concursoService;
+
+    public ConcursoDocenteInterinoController(ConcursoDocenteInterinoService concursoDocenteInterinoService){
+        this.concursoService = concursoDocenteInterinoService;
+    }
 
     @PatchMapping("/actualizar")
     public ResponseEntity<String> actualizar(@RequestBody Map<String, String> data) {

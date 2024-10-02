@@ -6,19 +6,20 @@ import com.sgd.sgdfback.dao.CambioModalidadDAO;
 import com.sgd.sgdfback.model.CambioModalidad;
 import com.sgd.sgdfback.service.CambioModalidadService;
 
-import lombok.AllArgsConstructor;
-
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-@AllArgsConstructor
 @Service
 public class CambioModalidadServiceImpl implements CambioModalidadService {
 
     private final CambioModalidadDAO cambioModalidadRepository;
+
+    public CambioModalidadServiceImpl(CambioModalidadDAO cambioModalidadDAO){
+        this.cambioModalidadRepository = cambioModalidadDAO;
+    }
 
     @Override
     public void actualizarColumna(String columna, String param, String nroTramite) {

@@ -1,4 +1,4 @@
-package com.sgd.sgdfback.object.workflow;
+package com.sgd.sgdfback.object;
 
 import lombok.*;
 
@@ -6,7 +6,7 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class InicioRequest {
+public class WorkflowInicioRequest {
     String flujo;
     String formulario;
 }

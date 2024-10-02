@@ -11,14 +11,15 @@ import org.springframework.web.bind.annotation.*;
 import com.sgd.sgdfback.model.AprobacionPerfil;
 import com.sgd.sgdfback.service.AprobacionPerfilService;
 
-import lombok.AllArgsConstructor;
-
-@AllArgsConstructor
 @RestController
 @RequestMapping("/api/aprobacionPerfil")
 public class AprobacionPerfilController {
 
     private final AprobacionPerfilService aprobacionService;
+
+    public AprobacionPerfilController(AprobacionPerfilService aprobacionPerfilService){
+        this.aprobacionService = aprobacionPerfilService;
+    }
 
     @PatchMapping("/actualizar")
     public ResponseEntity<String> actualizar(@RequestBody Map<String, String> data) {

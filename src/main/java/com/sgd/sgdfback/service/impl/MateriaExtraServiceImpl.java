@@ -6,17 +6,18 @@ import com.sgd.sgdfback.dao.MateriaExtraDAO;
 import com.sgd.sgdfback.model.MateriaExtra;
 import com.sgd.sgdfback.service.MateriaExtraService;
 
-import lombok.AllArgsConstructor;
-
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Optional;
 
-@AllArgsConstructor
 @Service
 public class MateriaExtraServiceImpl implements MateriaExtraService {
 
     private final MateriaExtraDAO materiaExtraRepository;
+
+    public MateriaExtraServiceImpl(MateriaExtraDAO materiaExtraDAO){
+        this.materiaExtraRepository = materiaExtraDAO;
+    }
 
     @Override
     public void actualizarColumna(String columna, String param, String nroTramite) {

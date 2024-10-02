@@ -6,17 +6,18 @@ import com.sgd.sgdfback.dao.DesignacionDocenteInterinoDAO;
 import com.sgd.sgdfback.model.DesignacionDocentesInterinos;
 import com.sgd.sgdfback.service.DesignacionDocenteInterinoService;
 
-import lombok.AllArgsConstructor;
-
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Optional;
 
-@AllArgsConstructor
 @Service
 public class DesignacionDocenteInterinoServiceImpl implements DesignacionDocenteInterinoService {
 
     private final DesignacionDocenteInterinoDAO designacionDocentesInterinosRepository;
+
+    public DesignacionDocenteInterinoServiceImpl(DesignacionDocenteInterinoDAO designacionDocenteInterinoDAO){
+        this.designacionDocentesInterinosRepository = designacionDocenteInterinoDAO;
+    }
 
     @Override
     public void actualizarColumna(String columna, String param, String nroTramite) {

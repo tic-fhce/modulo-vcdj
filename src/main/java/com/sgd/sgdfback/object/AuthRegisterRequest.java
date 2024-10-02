@@ -1,4 +1,4 @@
-package com.sgd.sgdfback.object.auth;
+package com.sgd.sgdfback.object;
 
 import java.time.LocalDate;
 
@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RegisterRequest {
+public class AuthRegisterRequest {
     String sexo;
     LocalDate fecha_nac;
     String carrera;

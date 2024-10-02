@@ -14,6 +14,10 @@ public class FlujoDAO {
     @PersistenceContext
     private EntityManager entityManager;
 
+    public FlujoDAO(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
+
     @Transactional
     public Integer findRoleIdByUsername(String username) {
         String sql = "SELECT r.id FROM user u " +

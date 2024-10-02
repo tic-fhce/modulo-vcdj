@@ -9,21 +9,22 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.sgd.sgdfback.dao.DocumentoDAO;
-import com.sgd.sgdfback.object.document.RecuperarRequest;
+import com.sgd.sgdfback.object.DocumentoRecuperarRequest;
 import com.sgd.sgdfback.service.DocumentoService;
-
-import lombok.AllArgsConstructor;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-@AllArgsConstructor
 @Service
 public class DocumentoServiceImpl implements DocumentoService {
 
     private final DocumentoDAO documentRepository;
+
+    public DocumentoServiceImpl(DocumentoDAO documentoDAO){
+        this.documentRepository = documentoDAO;
+    }
 
     @Override
     public void procesarDocumento(Integer userId, MultipartFile file, String fileName, String nroTramite, String flujo, String tabla)
@@ -43,7 +44,7 @@ public class DocumentoServiceImpl implements DocumentoService {
     }
 
     @Override
-    public ResponseEntity<Resource> obtenerDocumento(RecuperarRequest request) throws IOException {
+    public ResponseEntity<Resource> obtenerDocumento(DocumentoRecuperarRequest request) throws IOException {
         String nombreArchivo = documentRepository.obtenerNombreArchivo(request.getNrotramite(), request.getNombre(), request.getTabla());
         Path path = Paths.get("./uploads/" + request.getFlujo() + "/tramite_" + request.getNrotramite() + "/" + nombreArchivo);
         

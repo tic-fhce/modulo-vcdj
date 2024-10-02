@@ -11,14 +11,15 @@ import org.springframework.web.bind.annotation.*;
 import com.sgd.sgdfback.model.CertificadoUnico;
 import com.sgd.sgdfback.service.CertificadoUnicoService;
 
-import lombok.AllArgsConstructor;
-
-@AllArgsConstructor
 @RestController
 @RequestMapping("/api/certificadoUnico")
 public class CertificadoUnicoController {
 
     private final CertificadoUnicoService certificadoService;
+
+    public CertificadoUnicoController(CertificadoUnicoService certificadoUnicoService){
+        this.certificadoService = certificadoUnicoService;
+    }
 
     @PatchMapping("/actualizar")
     public ResponseEntity<String> actualizar(@RequestBody Map<String, String> data) {

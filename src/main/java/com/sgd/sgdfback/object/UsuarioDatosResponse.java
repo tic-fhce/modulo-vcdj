@@ -1,4 +1,4 @@
-package com.sgd.sgdfback.object.usuario;
+package com.sgd.sgdfback.object;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserResponse {
+public class UsuarioDatosResponse {
     String username;
     String rol;
     String unidad;

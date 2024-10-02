@@ -14,15 +14,17 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sgd.sgdfback.model.Usuario;
 import com.sgd.sgdfback.service.TramiteService;
 
-import lombok.AllArgsConstructor;
-
-@AllArgsConstructor
 @RestController
 @RequestMapping("/api/tramite")
 public class TramiteController {
 
     private final TramiteService tramiteService;
     private final ObjectMapper objectMapper;
+
+    public TramiteController(TramiteService tramiteService, ObjectMapper objectMapper){
+        this.tramiteService = tramiteService;
+        this.objectMapper = objectMapper;
+    }
 
     @GetMapping("/listar")
     public ResponseEntity<String> listar() {

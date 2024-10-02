@@ -16,21 +16,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sgd.sgdfback.model.AlumnoLibre;
-import com.sgd.sgdfback.object.alumno_libre.ActualizarColumnaRequestDTO;
-import com.sgd.sgdfback.object.alumno_libre.ObtenerColumnaRequestDTO;
+import com.sgd.sgdfback.object.AlumnoLibreActColRequest;
+import com.sgd.sgdfback.object.AlumnoLibreObtColRequest;
 import com.sgd.sgdfback.service.AlumnoLibreService;
-
-import lombok.AllArgsConstructor;
-
-@AllArgsConstructor
 @RestController
 @RequestMapping("/api/alumnoLibre")
 public class AlumnoLibreController {
-
+    
     private final AlumnoLibreService alumnoService;
 
+    public AlumnoLibreController(AlumnoLibreService alumnoLibreService){
+        this.alumnoService = alumnoLibreService;
+    }
+
     @PatchMapping("/actualizar")
-    public ResponseEntity<String> actualizar(@RequestBody ActualizarColumnaRequestDTO actualizarDTO) {
+    public ResponseEntity<String> actualizar(@RequestBody AlumnoLibreActColRequest actualizarDTO) {
         try {
             alumnoService.actualizarColumna(actualizarDTO);
             return new ResponseEntity<>("Actualización exitosa", HttpStatus.OK);
@@ -40,7 +40,7 @@ public class AlumnoLibreController {
     }
 
     @PostMapping("/obtener")
-    public ResponseEntity<String> obtener(@RequestBody ObtenerColumnaRequestDTO obtenerDTO) {
+    public ResponseEntity<String> obtener(@RequestBody AlumnoLibreObtColRequest obtenerDTO) {
         try {
             String valor = alumnoService.obtenerColumna(obtenerDTO);
             return ResponseEntity.ok(valor);

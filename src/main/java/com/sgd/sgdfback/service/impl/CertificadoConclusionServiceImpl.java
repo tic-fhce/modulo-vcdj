@@ -6,17 +6,18 @@ import com.sgd.sgdfback.dao.CertificadoConclusionDAO;
 import com.sgd.sgdfback.model.CertificadoConclusion;
 import com.sgd.sgdfback.service.CertificadoConclusionService;
 
-import lombok.AllArgsConstructor;
-
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Optional;
 
-@AllArgsConstructor
 @Service
 public class CertificadoConclusionServiceImpl implements CertificadoConclusionService {
 
     private final CertificadoConclusionDAO certificadoRepository;
+
+    public CertificadoConclusionServiceImpl(CertificadoConclusionDAO certificadoConclusionDAO){
+        this.certificadoRepository = certificadoConclusionDAO;
+    }
 
     @Override
     public void actualizarColumna(String columna, String param, String nroTramite) {

@@ -1,4 +1,4 @@
-package com.sgd.sgdfback.object.document;
+package com.sgd.sgdfback.object;
 
 import lombok.*;
 
@@ -6,7 +6,7 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class RecuperarRequest {
+public class DocumentoRecuperarRequest {
     String nombre;
     String nrotramite;
     String tabla;

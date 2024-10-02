@@ -1,4 +1,4 @@
-package com.sgd.sgdfback.config.Jwt;
+package com.sgd.sgdfback.config;
 
 import java.util.Date;
 import java.util.HashMap;

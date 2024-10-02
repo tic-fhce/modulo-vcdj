@@ -11,17 +11,18 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.sgd.sgdfback.model.Usuario;
-import com.sgd.sgdfback.object.document.RecuperarRequest;
+import com.sgd.sgdfback.object.DocumentoRecuperarRequest;
 import com.sgd.sgdfback.service.DocumentoService;
 
-import lombok.AllArgsConstructor;
-
-@AllArgsConstructor
 @RestController
 @RequestMapping("/api/documento")
 public class DocumentoController {
 
     private final DocumentoService documentS;
+
+    public DocumentoController(DocumentoService documentoService){
+        this.documentS = documentoService;
+    }
 
     @PostMapping("/subir")
     public ResponseEntity<String> subirDocumento(
@@ -43,7 +44,7 @@ public class DocumentoController {
     }
 
     @PostMapping("/recuperar")
-    public ResponseEntity<Resource> recuperarDocumento(@RequestBody RecuperarRequest request) {
+    public ResponseEntity<Resource> recuperarDocumento(@RequestBody DocumentoRecuperarRequest request) {
         try {
             return documentS.obtenerDocumento(request);
         } catch (IOException e) {
