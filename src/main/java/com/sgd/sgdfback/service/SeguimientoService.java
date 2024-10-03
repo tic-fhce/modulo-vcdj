@@ -3,7 +3,6 @@ package com.sgd.sgdfback.service;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sgd.sgdfback.dao.SeguimientoDAO;
@@ -11,8 +10,7 @@ import com.sgd.sgdfback.dao.SeguimientoDAO;
 @Service
 public class SeguimientoService {
 
-    @Autowired
-    private final SeguimientoDAO seguimientoRepository;
+    private final SeguimientoDAO seguimientoRepository;    
 
     public SeguimientoService(SeguimientoDAO seguimientoRepository) {
         this.seguimientoRepository = seguimientoRepository;

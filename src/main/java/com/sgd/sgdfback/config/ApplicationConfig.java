@@ -14,13 +14,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.sgd.sgdfback.dao.UsuarioDAO;
 
-import lombok.RequiredArgsConstructor;
-
 @Configuration
-@RequiredArgsConstructor
 public class ApplicationConfig {
 
     private final UsuarioDAO userRepository;
+
+    public ApplicationConfig(UsuarioDAO usuarioDAO){
+        this.userRepository = usuarioDAO;
+    }
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception

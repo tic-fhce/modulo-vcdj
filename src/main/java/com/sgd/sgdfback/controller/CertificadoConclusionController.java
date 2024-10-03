@@ -11,14 +11,15 @@ import org.springframework.web.bind.annotation.*;
 import com.sgd.sgdfback.model.CertificadoConclusion;
 import com.sgd.sgdfback.service.CertificadoConclusionService;
 
-import lombok.AllArgsConstructor;
-
-@AllArgsConstructor
 @RestController
 @RequestMapping("/api/certificadoConclusion")
 public class CertificadoConclusionController {
 
     private final CertificadoConclusionService certificadoService;
+
+    public CertificadoConclusionController(CertificadoConclusionService certificadoConclusionService){
+        this.certificadoService = certificadoConclusionService;
+    }
 
     @PatchMapping("/actualizar")
     public ResponseEntity<String> actualizar(@RequestBody Map<String, String> data) {

@@ -6,17 +6,18 @@ import com.sgd.sgdfback.dao.DesignacionTribunalDAO;
 import com.sgd.sgdfback.model.DesignacionTribunal;
 import com.sgd.sgdfback.service.DesignacionTribunalService;
 
-import lombok.AllArgsConstructor;
-
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Optional;
 
-@AllArgsConstructor
 @Service
 public class DesignacionTribunalServiceImpl implements DesignacionTribunalService {
 
     private final DesignacionTribunalDAO designacionTribunalRepository;
+
+    public DesignacionTribunalServiceImpl(DesignacionTribunalDAO designacionTribunalDAO){
+        this.designacionTribunalRepository = designacionTribunalDAO;
+    }
 
     @Override
     public void actualizarColumna(String columna, String param, String nroTramite) {

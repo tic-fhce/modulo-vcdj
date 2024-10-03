@@ -11,14 +11,15 @@ import org.springframework.web.bind.annotation.*;
 import com.sgd.sgdfback.model.MateriaExtra;
 import com.sgd.sgdfback.service.MateriaExtraService;
 
-import lombok.AllArgsConstructor;
-
-@AllArgsConstructor
 @RestController
 @RequestMapping("/api/materiaExtra")
 public class MateriaExtraController {
 
     private final MateriaExtraService materiaService;
+
+    public MateriaExtraController(MateriaExtraService materiaExtraService){
+        this.materiaService = materiaExtraService;
+    }
 
     @PatchMapping("/actualizar")
     public ResponseEntity<String> actualizar(@RequestBody Map<String, String> data) {

@@ -7,17 +7,18 @@ import com.sgd.sgdfback.model.Convocatoria;
 import com.sgd.sgdfback.model.Tramite;
 import com.sgd.sgdfback.service.ConvocatoriaService;
 
-import lombok.AllArgsConstructor;
-
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Optional;
 
-@AllArgsConstructor
 @Service
 public class ConvocatoriaServiceImpl implements ConvocatoriaService {
 
     private final ConvocatoriaDAO convocatoriaRepository;
+
+    public ConvocatoriaServiceImpl(ConvocatoriaDAO convocatoriaDAO){
+        this.convocatoriaRepository = convocatoriaDAO;
+    }
 
     @Override
     public void actualizarColumna(String columna, String param, String nroTramite, Integer userId) {

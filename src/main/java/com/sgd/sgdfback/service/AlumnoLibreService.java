@@ -4,12 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import com.sgd.sgdfback.model.AlumnoLibre;
-import com.sgd.sgdfback.object.alumno_libre.ActualizarColumnaRequestDTO;
-import com.sgd.sgdfback.object.alumno_libre.ObtenerColumnaRequestDTO;
+import com.sgd.sgdfback.object.AlumnoLibreActColRequest;
+import com.sgd.sgdfback.object.AlumnoLibreObtColRequest;
 
 public interface AlumnoLibreService {
-    void actualizarColumna(ActualizarColumnaRequestDTO actualizarDTO);
-    String obtenerColumna(ObtenerColumnaRequestDTO obtenerDTO);
+    void actualizarColumna(AlumnoLibreActColRequest actualizarDTO);
+    String obtenerColumna(AlumnoLibreObtColRequest obtenerDTO);
 
     // Métodos CRUD
     AlumnoLibre crearAlumno(AlumnoLibre alumnoLibre);

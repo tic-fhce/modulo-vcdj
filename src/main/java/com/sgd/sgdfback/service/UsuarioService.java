@@ -5,17 +5,18 @@ import org.springframework.stereotype.Service;
 import com.sgd.sgdfback.dao.UsuarioRolDAO;
 import com.sgd.sgdfback.model.Usuario;
 import com.sgd.sgdfback.model.UsuarioRol;
-import com.sgd.sgdfback.object.usuario.UserResponse;
-
-import lombok.RequiredArgsConstructor;
+import com.sgd.sgdfback.object.UsuarioDatosResponse;
 
 @Service
-@RequiredArgsConstructor
 public class UsuarioService {
 
     private final UsuarioRolDAO userRoleRepository;
 
-    public UserResponse datosUser(Usuario user) {
+    public UsuarioService(UsuarioRolDAO userRoleRepository) {
+        this.userRoleRepository = userRoleRepository;
+    }
+
+    public UsuarioDatosResponse datosUser(Usuario user) {
         UsuarioRol userRole = userRoleRepository.findFirstByUserId(user.getId());
 
         String username = user.getUsername();
@@ -23,7 +24,7 @@ public class UsuarioService {
         String unidad = userRole.getUnidad().getNombre();
         String cif = user.getCif();
 
-        return UserResponse.builder()
+        return new UsuarioDatosResponse.builder()
                 .username(username)
                 .rol(rol)
                 .unidad(unidad)

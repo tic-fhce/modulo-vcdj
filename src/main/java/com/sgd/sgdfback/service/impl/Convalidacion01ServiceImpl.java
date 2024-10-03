@@ -6,17 +6,18 @@ import com.sgd.sgdfback.dao.Convalidacion01DAO;
 import com.sgd.sgdfback.model.Convalidacion01;
 import com.sgd.sgdfback.service.Convalidacion01Service;
 
-import lombok.AllArgsConstructor;
-
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Optional;
 
-@AllArgsConstructor
 @Service
 public class Convalidacion01ServiceImpl implements Convalidacion01Service {
 
     private final Convalidacion01DAO convalidacion01Repository;
+
+    public Convalidacion01ServiceImpl(Convalidacion01DAO convalidacion01dao){
+        this.convalidacion01Repository = convalidacion01dao;
+    }
 
     @Override
     public void actualizarColumna(String columna, String param, String nroTramite) {

@@ -13,14 +13,15 @@ import com.sgd.sgdfback.model.Convocatoria;
 import com.sgd.sgdfback.model.Usuario;
 import com.sgd.sgdfback.service.ConvocatoriaService;
 
-import lombok.AllArgsConstructor;
-
-@AllArgsConstructor
 @RestController
 @RequestMapping("/api/convocatoria")
 public class ConvocatoriaController {
 
     private final ConvocatoriaService convocatoriaService;
+
+    public ConvocatoriaController(ConvocatoriaService convocatoriaService){
+        this.convocatoriaService = convocatoriaService;
+    }
 
     @PatchMapping("/actualizar")
     public ResponseEntity<String> actualizar(@RequestBody Map<String, String> data, @AuthenticationPrincipal Usuario user) {

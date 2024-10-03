@@ -14,6 +14,10 @@ public class WorkflowDAO {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    public WorkflowDAO(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
     public List<Map<String, Object>> datos_tramite_hr(String id_tramite) {
         String sql = "SELECT t.id, t.tipo, t.creacion, t.proceso, un.nombre AS carrera, f.formulario, t.estado, r.name AS unidad " + //
                         "FROM tramite t " + //

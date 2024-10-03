@@ -6,13 +6,14 @@ import java.util.Map;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import lombok.RequiredArgsConstructor;
-
 @Repository
-@RequiredArgsConstructor
 public class TramiteDAO {
 
     private final JdbcTemplate jdbcTemplate;
+
+    public TramiteDAO(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     public List<Map<String, Object>> findAllTramites() {
         String sql = "SELECT t.id, t.carrera, t.tipo, f.formulario, u.username, t.estado, r.name AS unidad " +

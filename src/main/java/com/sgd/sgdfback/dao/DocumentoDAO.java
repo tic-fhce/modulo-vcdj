@@ -12,6 +12,10 @@ public class DocumentoDAO {
     @PersistenceContext
     private EntityManager entityManager;
 
+    public DocumentoDAO(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
+
     @Transactional
     public Integer countByTramiteId(String tramiteId, String tabla) {
         String query = "SELECT COUNT(*) FROM " + tabla + " WHERE tramite_id = :tramiteId";

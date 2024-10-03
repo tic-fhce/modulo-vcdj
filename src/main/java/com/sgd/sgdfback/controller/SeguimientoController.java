@@ -15,16 +15,17 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sgd.sgdfback.model.Usuario;
 import com.sgd.sgdfback.service.SeguimientoService;
 
-import lombok.RequiredArgsConstructor;
-
-
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/api/seguimiento")
 public class SeguimientoController {
 
     private final SeguimientoService seguimientoService;
     private final ObjectMapper objectMapper;
+
+    public SeguimientoController(SeguimientoService seguimientoService, ObjectMapper objectMapper){
+        this.seguimientoService = seguimientoService;
+        this.objectMapper = objectMapper;
+    }
 
     @GetMapping("/listar")
     public ResponseEntity<String> listar() {

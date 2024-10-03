@@ -4,24 +4,25 @@ import org.springframework.stereotype.Service;
 
 import com.sgd.sgdfback.dao.AlumnoLibreDAO;
 import com.sgd.sgdfback.model.AlumnoLibre;
-import com.sgd.sgdfback.object.alumno_libre.ActualizarColumnaRequestDTO;
-import com.sgd.sgdfback.object.alumno_libre.ObtenerColumnaRequestDTO;
+import com.sgd.sgdfback.object.AlumnoLibreActColRequest;
+import com.sgd.sgdfback.object.AlumnoLibreObtColRequest;
 import com.sgd.sgdfback.service.AlumnoLibreService;
-
-import lombok.AllArgsConstructor;
 
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Optional;
 
-@AllArgsConstructor
 @Service
 public class AlumnoLibreServiceImpl implements AlumnoLibreService {
     
     private final AlumnoLibreDAO alumnoRepository;
 
+    public AlumnoLibreServiceImpl(AlumnoLibreDAO alumnoLibreDAO){
+        this.alumnoRepository = alumnoLibreDAO;
+    }
+
     @Override
-    public void actualizarColumna(ActualizarColumnaRequestDTO actualizarDTO) {
+    public void actualizarColumna(AlumnoLibreActColRequest actualizarDTO) {
         AlumnoLibre alumno = alumnoRepository.findByTramiteId(actualizarDTO.getNrotramite());
 
         if (alumno != null) {
@@ -39,7 +40,7 @@ public class AlumnoLibreServiceImpl implements AlumnoLibreService {
     }
 
     @Override
-    public String obtenerColumna(ObtenerColumnaRequestDTO obtenerDTO) {
+    public String obtenerColumna(AlumnoLibreObtColRequest obtenerDTO) {
         AlumnoLibre alumno = alumnoRepository.findByTramiteId(obtenerDTO.getNrotramite());
         if (alumno != null) {
             try {

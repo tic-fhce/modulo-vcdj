@@ -6,17 +6,18 @@ import com.sgd.sgdfback.dao.CertificadoUnicoDAO;
 import com.sgd.sgdfback.model.CertificadoUnico;
 import com.sgd.sgdfback.service.CertificadoUnicoService;
 
-import lombok.AllArgsConstructor;
-
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Optional;
 
-@AllArgsConstructor
 @Service
 public class CertificadoUnicoServiceImpl implements CertificadoUnicoService {
 
     private final CertificadoUnicoDAO certificadoUnicoRepository;
+
+    public CertificadoUnicoServiceImpl(CertificadoUnicoDAO certificadoUnicoDAO){
+        this.certificadoUnicoRepository = certificadoUnicoDAO;
+    }
 
     @Override
     public void actualizarColumna(String columna, String param, String nroTramite) {

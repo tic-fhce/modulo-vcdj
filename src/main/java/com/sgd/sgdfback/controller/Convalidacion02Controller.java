@@ -11,14 +11,15 @@ import org.springframework.web.bind.annotation.*;
 import com.sgd.sgdfback.model.Convalidacion02;
 import com.sgd.sgdfback.service.Convalidacion02Service;
 
-import lombok.AllArgsConstructor;
-
-@AllArgsConstructor
 @RestController
 @RequestMapping("/api/convalidacion02")
 public class Convalidacion02Controller {
 
     private final Convalidacion02Service convalidacionService;
+
+    public Convalidacion02Controller(Convalidacion02Service convalidacion02Service){
+        this.convalidacionService = convalidacion02Service;
+    }
 
     @PatchMapping("/actualizar")
     public ResponseEntity<String> actualizar(@RequestBody Map<String, String> data) {

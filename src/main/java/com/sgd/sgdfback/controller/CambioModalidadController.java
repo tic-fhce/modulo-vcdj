@@ -11,14 +11,15 @@ import org.springframework.web.bind.annotation.*;
 import com.sgd.sgdfback.model.CambioModalidad;
 import com.sgd.sgdfback.service.CambioModalidadService;
 
-import lombok.AllArgsConstructor;
-
-@AllArgsConstructor
 @RestController
 @RequestMapping("/api/cambioModalidad")
 public class CambioModalidadController {
 
     private final CambioModalidadService cambioService;
+
+    public CambioModalidadController(CambioModalidadService cambioModalidadService){
+        this.cambioService = cambioModalidadService;
+    }
 
     @PatchMapping("/actualizar")
     public ResponseEntity<String> actualizar(@RequestBody Map<String, String> data) {

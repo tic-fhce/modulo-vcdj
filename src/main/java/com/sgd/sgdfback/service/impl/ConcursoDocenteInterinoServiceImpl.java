@@ -6,17 +6,18 @@ import com.sgd.sgdfback.dao.ConcursoDocenteInterinoDAO;
 import com.sgd.sgdfback.model.ConcursoDocentesInterinos;
 import com.sgd.sgdfback.service.ConcursoDocenteInterinoService;
 
-import lombok.AllArgsConstructor;
-
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Optional;
 
-@AllArgsConstructor
 @Service
 public class ConcursoDocenteInterinoServiceImpl implements ConcursoDocenteInterinoService {
 
     private final ConcursoDocenteInterinoDAO concursoDocentesInterinosRepository;
+
+    public ConcursoDocenteInterinoServiceImpl(ConcursoDocenteInterinoDAO concursoDocenteInterinoDAO){
+        this.concursoDocentesInterinosRepository = concursoDocenteInterinoDAO;
+    }
 
     @Override
     public void actualizarColumna(String columna, String param, String nroTramite) {

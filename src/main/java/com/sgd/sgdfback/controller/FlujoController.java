@@ -12,15 +12,17 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sgd.sgdfback.model.Usuario;
 import com.sgd.sgdfback.service.FlujoService;
 
-import lombok.RequiredArgsConstructor;
-
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/api/flujo")
 public class FlujoController {
 
     private final FlujoService flujoService;
     private final ObjectMapper objectMapper;
+
+    public FlujoController(FlujoService flujoService, ObjectMapper objectMapper){
+        this.flujoService = flujoService;
+        this.objectMapper = objectMapper;
+    }
 
     @GetMapping
     public String listarFlujosP1(@AuthenticationPrincipal Usuario user) {
