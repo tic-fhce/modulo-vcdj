@@ -14,14 +14,6 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 @Table(name = "role")
 public class Rol {
@@ -47,5 +39,66 @@ public class Rol {
     @OneToMany(mappedBy = "role")
     @JsonIgnore
     private List<UsuarioRol> user_roles;
+    
+
+    public Rol() {
+    }
+
+    public Rol(Integer id, RolNombre name, String codigo, List<Flujo> flujos, List<Seguimiento> seguimientos, List<UsuarioRol> user_roles) {
+        this.id = id;
+        this.name = name;
+        this.codigo = codigo;
+        this.flujos = flujos;
+        this.seguimientos = seguimientos;
+        this.user_roles = user_roles;
+    }
+
+    public Integer getId() {
+        return this.id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public RolNombre getName() {
+        return this.name;
+    }
+
+    public void setName(RolNombre name) {
+        this.name = name;
+    }
+
+    public String getCodigo() {
+        return this.codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    public List<Flujo> getFlujos() {
+        return this.flujos;
+    }
+
+    public void setFlujos(List<Flujo> flujos) {
+        this.flujos = flujos;
+    }
+
+    public List<Seguimiento> getSeguimientos() {
+        return this.seguimientos;
+    }
+
+    public void setSeguimientos(List<Seguimiento> seguimientos) {
+        this.seguimientos = seguimientos;
+    }
+
+    public List<UsuarioRol> getUser_roles() {
+        return this.user_roles;
+    }
+
+    public void setUser_roles(List<UsuarioRol> user_roles) {
+        this.user_roles = user_roles;
+    }
 
 }

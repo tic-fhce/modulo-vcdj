@@ -24,7 +24,7 @@ public class UsuarioService {
         String unidad = userRole.getUnidad().getNombre();
         String cif = user.getCif();
 
-        return UsuarioDatosResponse.builder()
+        return new UsuarioDatosResponse.builder()
                 .username(username)
                 .rol(rol)
                 .unidad(unidad)

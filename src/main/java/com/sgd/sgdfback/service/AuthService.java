@@ -51,7 +51,7 @@ public class AuthService {
                 Usuario user = userRepository.findByUsername(request.getUsername())
                                 .orElseThrow(() -> new NoSuchElementException("Usuario no encontrado"));
                 String token = jwtService.getToken(user);
-                return AuthTokenResponse.builder()
+                return new AuthTokenResponse.builder()
                                 .token(token)
                                 .build();
         }
@@ -73,7 +73,7 @@ public class AuthService {
                 Unidad unidad = unidadRepository.findByNombre(request.getCarrera())
                                 .orElseThrow(() -> new RuntimeException("Unidad desconocida"));
 
-                Usuario user = Usuario.builder()
+                Usuario user = new Usuario.builder()
                                 .cif(cif)
                                 .username(request.getEmail())
                                 .password(passwordEncoder.encode(request.getPassword()))
@@ -87,7 +87,7 @@ public class AuthService {
                 userRoleRepository.save(uRole);
 
                 // Crear y devolver la respuesta de autenticación
-                return AuthTokenResponse.builder()
+                return new AuthTokenResponse.builder()
                                 .token(jwtService.getToken(user))
                                 .build();
         }

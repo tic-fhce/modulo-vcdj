@@ -8,13 +8,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "designacion_doc_interinos")
 public class DesignacionDocentesInterinos {
@@ -37,4 +30,102 @@ public class DesignacionDocentesInterinos {
     @ManyToOne
     @JoinColumn(name = "tramite_id")
     private Tramite tramite;
+
+
+    public DesignacionDocentesInterinos() {
+    }
+
+    public DesignacionDocentesInterinos(Integer id, Integer user_id, Long cif, String d_faltantes, String d_proy_resolucion, String d_resolucion, String c_proy_resolucion, String c_resolucion, String r_proy_resolucion, Tramite tramite) {
+        this.id = id;
+        this.user_id = user_id;
+        this.cif = cif;
+        this.d_faltantes = d_faltantes;
+        this.d_proy_resolucion = d_proy_resolucion;
+        this.d_resolucion = d_resolucion;
+        this.c_proy_resolucion = c_proy_resolucion;
+        this.c_resolucion = c_resolucion;
+        this.r_proy_resolucion = r_proy_resolucion;
+        this.tramite = tramite;
+    }
+
+    public Integer getId() {
+        return this.id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getUser_id() {
+        return this.user_id;
+    }
+
+    public void setUser_id(Integer user_id) {
+        this.user_id = user_id;
+    }
+
+    public Long getCif() {
+        return this.cif;
+    }
+
+    public void setCif(Long cif) {
+        this.cif = cif;
+    }
+
+    public String getD_faltantes() {
+        return this.d_faltantes;
+    }
+
+    public void setD_faltantes(String d_faltantes) {
+        this.d_faltantes = d_faltantes;
+    }
+
+    public String getD_proy_resolucion() {
+        return this.d_proy_resolucion;
+    }
+
+    public void setD_proy_resolucion(String d_proy_resolucion) {
+        this.d_proy_resolucion = d_proy_resolucion;
+    }
+
+    public String getD_resolucion() {
+        return this.d_resolucion;
+    }
+
+    public void setD_resolucion(String d_resolucion) {
+        this.d_resolucion = d_resolucion;
+    }
+
+    public String getC_proy_resolucion() {
+        return this.c_proy_resolucion;
+    }
+
+    public void setC_proy_resolucion(String c_proy_resolucion) {
+        this.c_proy_resolucion = c_proy_resolucion;
+    }
+
+    public String getC_resolucion() {
+        return this.c_resolucion;
+    }
+
+    public void setC_resolucion(String c_resolucion) {
+        this.c_resolucion = c_resolucion;
+    }
+
+    public String getR_proy_resolucion() {
+        return this.r_proy_resolucion;
+    }
+
+    public void setR_proy_resolucion(String r_proy_resolucion) {
+        this.r_proy_resolucion = r_proy_resolucion;
+    }
+
+    public Tramite getTramite() {
+        return this.tramite;
+    }
+
+    public void setTramite(Tramite tramite) {
+        this.tramite = tramite;
+    }
+
 }
