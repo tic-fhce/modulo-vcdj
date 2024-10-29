@@ -12,7 +12,7 @@ import com.sgd.sgdfback.model.AprobacionPerfil;
 import com.sgd.sgdfback.service.AprobacionPerfilService;
 
 @RestController
-@RequestMapping("/api/aprobacionPerfil")
+@RequestMapping("/aprobacionPerfil")
 public class AprobacionPerfilController {
 
     private final AprobacionPerfilService aprobacionService;
@@ -60,7 +60,7 @@ public class AprobacionPerfilController {
         return aprobacionPerfil.map(ResponseEntity::ok).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @GetMapping
+    @GetMapping("/listar")
     public List<AprobacionPerfil> obtenerTodosLosAprobacionPerfil() {
         return aprobacionService.obtenerTodosLosAprobacionPerfil();
     }

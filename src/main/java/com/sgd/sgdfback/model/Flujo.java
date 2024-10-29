@@ -1,15 +1,14 @@
 package com.sgd.sgdfback.model;
 
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "flujo")
@@ -22,31 +21,37 @@ public class Flujo {
     private String proceso_sig;
     private String formulario;
     private Integer tiempo;
-    
+    private String habilitado;
 
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Rol role;
 
-    @OneToMany(mappedBy = "flujo")
-    private List<ProcesoCondicion> procesos_cond;
+    @ManyToOne
+    @JoinColumn(name = "procesocond_id")
+    private ProcesoCondicion procesoCondicion;
 
     @ManyToOne
     @JoinColumn(name = "categoria_id")
+    @JsonIgnore
     private Categoria categoria;
+
+
 
     public Flujo() {
     }
 
-    public Flujo(Integer id, String flujo, String proceso, String proceso_sig, String formulario, Integer tiempo, Rol role, List<ProcesoCondicion> procesos_cond, Categoria categoria) {
+
+    public Flujo(Integer id, String flujo, String proceso, String proceso_sig, String formulario, Integer tiempo, String habilitado, Rol role, ProcesoCondicion procesoCondicion, Categoria categoria) {
         this.id = id;
         this.flujo = flujo;
         this.proceso = proceso;
         this.proceso_sig = proceso_sig;
         this.formulario = formulario;
         this.tiempo = tiempo;
+        this.habilitado = habilitado;
         this.role = role;
-        this.procesos_cond = procesos_cond;
+        this.procesoCondicion = procesoCondicion;
         this.categoria = categoria;
     }
 
@@ -98,6 +103,14 @@ public class Flujo {
         this.tiempo = tiempo;
     }
 
+    public String getHabilitado() {
+        return this.habilitado;
+    }
+
+    public void setHabilitado(String habilitado) {
+        this.habilitado = habilitado;
+    }
+
     public Rol getRole() {
         return this.role;
     }
@@ -106,12 +119,12 @@ public class Flujo {
         this.role = role;
     }
 
-    public List<ProcesoCondicion> getProcesos_cond() {
-        return this.procesos_cond;
+    public ProcesoCondicion getProcesoCondicion() {
+        return this.procesoCondicion;
     }
 
-    public void setProcesos_cond(List<ProcesoCondicion> procesos_cond) {
-        this.procesos_cond = procesos_cond;
+    public void setProcesoCondicion(ProcesoCondicion procesoCondicion) {
+        this.procesoCondicion = procesoCondicion;
     }
 
     public Categoria getCategoria() {
@@ -121,5 +134,5 @@ public class Flujo {
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
-
+    
 }

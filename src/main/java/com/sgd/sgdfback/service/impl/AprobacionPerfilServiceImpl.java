@@ -10,6 +10,8 @@ import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 @Service
 public class AprobacionPerfilServiceImpl implements AprobacionPerfilService {
 
@@ -64,6 +66,7 @@ public class AprobacionPerfilServiceImpl implements AprobacionPerfilService {
     }
 
     @Override
+    @Transactional
     public List<AprobacionPerfil> obtenerTodosLosAprobacionPerfil() {
         return aprobacionPerfilRepository.findAll();
     }
