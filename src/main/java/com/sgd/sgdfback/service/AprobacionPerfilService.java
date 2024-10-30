@@ -8,6 +8,8 @@ public interface AprobacionPerfilService {
     void actualizarColumna(String columna, String param, String nroTramite);
     String obtenerColumna(String nroTramite, String columna);
 
+    List<AprobacionPerfil> obtenerAprobacionPerfilsCarreraYear(String carrera, Integer year);
+
     // Métodos CRUD
     AprobacionPerfil crearAprobacionPerfil(AprobacionPerfil aprobacionPerfil);
     Optional<AprobacionPerfil> obtenerAprobacionPerfilPorId(Integer id);

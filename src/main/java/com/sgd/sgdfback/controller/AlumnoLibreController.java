@@ -18,9 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sgd.sgdfback.model.AlumnoLibre;
 import com.sgd.sgdfback.object.AlumnoLibreActColRequest;
 import com.sgd.sgdfback.object.AlumnoLibreObtColRequest;
+import com.sgd.sgdfback.object.ListarCYRequest;
 import com.sgd.sgdfback.service.AlumnoLibreService;
 @RestController
-@RequestMapping("/api/alumnoLibre")
+@RequestMapping("/alumnoLibre")
 public class AlumnoLibreController {
     
     private final AlumnoLibreService alumnoService;
@@ -49,6 +50,10 @@ public class AlumnoLibreController {
         }
     }
 
+    @PostMapping("/listar-carrera-year")
+    public List<AlumnoLibre> getListarCarreraYear(@RequestBody ListarCYRequest request) {
+        return alumnoService.obtenerAlumnoLibreCarreraYear(request.getCarrera(), request.getYear());
+    }
     
     // Endpoints para el CRUD
     @PostMapping

@@ -18,5 +18,7 @@ public interface DesignacionTribunalService {
 
     // Métodos adicionales
     List<DesignacionTribunal> obtenerAprobacionPerfilPorUsuario(Integer userId);
+
+    List<DesignacionTribunal> obtenerAprobacionPerfilsCarreraYear(String carrera, Integer year);
 }
     

@@ -9,6 +9,8 @@ public interface Convalidacion01Service {
     void actualizarColumna(String columna, String param, String nroTramite);
     String obtenerColumna(String nroTramite, String columna);
 
+    List<Convalidacion01> obtenerConvalidacionCarreraYear(String carrera, Integer year);
+
     // Métodos CRUD
     Convalidacion01 crearConvalidacion(Convalidacion01 convalidacion01);
     Optional<Convalidacion01> obtenerConvalidacionPorId(Integer id);

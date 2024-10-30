@@ -52,6 +52,11 @@ public class CertificadoConclusionServiceImpl implements CertificadoConclusionSe
         }
     }
 
+    @Override
+    public List<CertificadoConclusion> obtenerCertificadosCarreraYear(String carrera, Integer year){
+        return certificadoRepository.findByCarreraAndYear(carrera, year);
+    }
+
     // Implementación del CRUD
     @Override
     public CertificadoConclusion crearCertificadoConclusion(CertificadoConclusion certificadoConclusion) {

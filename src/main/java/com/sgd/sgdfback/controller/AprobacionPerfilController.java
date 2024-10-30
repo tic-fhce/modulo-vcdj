@@ -9,7 +9,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.sgd.sgdfback.model.AprobacionPerfil;
+import com.sgd.sgdfback.object.ListarCYRequest;
 import com.sgd.sgdfback.service.AprobacionPerfilService;
+import org.springframework.web.bind.annotation.GetMapping;
+
 
 @RestController
 @RequestMapping("/aprobacionPerfil")
@@ -47,6 +50,12 @@ public class AprobacionPerfilController {
             return new ResponseEntity<>("Error al obtener: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @PostMapping("/listar-carrera-year")
+    public List<AprobacionPerfil> getListarCarreraYear(@RequestBody ListarCYRequest request) {
+        return aprobacionService.obtenerAprobacionPerfilsCarreraYear(request.getCarrera(), request.getYear());
+    }
+    
 
     // Endpoints para el CRUD
     @PostMapping

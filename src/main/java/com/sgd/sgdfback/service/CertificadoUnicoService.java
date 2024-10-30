@@ -9,6 +9,8 @@ public interface CertificadoUnicoService {
     void actualizarColumna(String columna, String param, String nroTramite);
     String obtenerColumna(String nroTramite, String columna);
 
+    List<CertificadoUnico> obtenerCertificadosCarreraYear(String carrera, Integer year);
+
     // Métodos CRUD
     CertificadoUnico crearCertificadoUnico(CertificadoUnico certificadoUnico);
     Optional<CertificadoUnico> obtenerCertificadoUnicoPorId(Integer id);

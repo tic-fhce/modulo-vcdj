@@ -52,6 +52,11 @@ public class MateriaExtraServiceImpl implements MateriaExtraService {
         }
     }
 
+    @Override
+    public List<MateriaExtra> obtenerMateriaExtCarreraYear(String materia, Integer year){
+        return materiaExtraRepository.findByCarreraAndYear(materia, year);
+    }
+
     // Implementación del CRUD
     @Override
     public MateriaExtra crearMateriaExtra(MateriaExtra materiaExtra) {

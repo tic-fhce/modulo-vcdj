@@ -54,6 +54,15 @@ public class AprobacionPerfilServiceImpl implements AprobacionPerfilService {
         }
     }
 
+    @Override
+    public List<AprobacionPerfil> obtenerAprobacionPerfilsCarreraYear(String carrera, Integer year){
+        return aprobacionPerfilRepository.findByCarreraAndYear(carrera, year);
+    }
+
+
+
+
+
     // Implementación del CRUD
     @Override
     public AprobacionPerfil crearAprobacionPerfil(AprobacionPerfil aprobacionPerfil) {

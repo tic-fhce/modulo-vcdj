@@ -11,6 +11,8 @@ public interface CambioModalidadService {
     String obtenerColumna(String nroTramite, String columna);
     Map<String, Object> obtenerTodoPorTramiteId(String nroTramite);
 
+    List<CambioModalidad> obtenerCambioModCarreraYear(String carrera, Integer year);
+
     // Métodos CRUD
     CambioModalidad crearCambioModalidad(CambioModalidad cambioModalidad);
     Optional<CambioModalidad> obtenerCambioModalidadPorId(Integer id);

@@ -52,6 +52,11 @@ public class Convalidacion02ServiceImpl implements Convalidacion02Service {
         }
     }
 
+    @Override
+    public List<Convalidacion02> obtenerConvalidacionCarreraYear(String carrera, Integer year){
+        return convalidacion02Repository.findByCarreraAndYear(carrera, year);
+    }
+
     // Implementación del CRUD
     @Override
     public Convalidacion02 crearConvalidacion(Convalidacion02 convalidacion02) {

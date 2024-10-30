@@ -55,6 +55,11 @@ public class AlumnoLibreServiceImpl implements AlumnoLibreService {
         }
     }
 
+    @Override 
+    public List<AlumnoLibre> obtenerAlumnoLibreCarreraYear(String carrera, Integer year){
+        return alumnoRepository.findByCarreraAndYear(carrera, year);
+    }
+
 
     // Implementación del CRUD
     @Override

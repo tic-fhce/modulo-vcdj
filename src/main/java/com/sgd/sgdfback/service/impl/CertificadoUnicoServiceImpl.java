@@ -52,6 +52,11 @@ public class CertificadoUnicoServiceImpl implements CertificadoUnicoService {
         }
     }
 
+    @Override
+    public List<CertificadoUnico> obtenerCertificadosCarreraYear(String carrera, Integer year){
+        return certificadoUnicoRepository.findByCarreraAndYear(carrera, year);
+    }
+
     // Implementación del CRUD
     @Override
     public CertificadoUnico crearCertificadoUnico(CertificadoUnico certificadoUnico) {

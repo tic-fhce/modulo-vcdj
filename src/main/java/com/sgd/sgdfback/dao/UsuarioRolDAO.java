@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.sgd.sgdfback.model.UsuarioRol;
 
 @Repository
-public interface UsuarioRolDAO extends JpaRepository<UsuarioRol, Integer>{
+public interface UsuarioRolDAO extends JpaRepository<UsuarioRol, Integer> {
     UsuarioRol findFirstByUserId(Integer userId);
+
 }
