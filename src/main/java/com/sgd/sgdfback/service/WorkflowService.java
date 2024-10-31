@@ -4,10 +4,20 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sgd.sgdfback.dao.FlujoDAO;
+import com.sgd.sgdfback.dao.ProcesoCondicionDAO;
+import com.sgd.sgdfback.dao.SeguimientoDAO;
+import com.sgd.sgdfback.dao.TramiteDAO;
+import com.sgd.sgdfback.dao.UsuarioRolDAO;
 import com.sgd.sgdfback.dao.WorkflowDAO;
+import com.sgd.sgdfback.model.Flujo;
+import com.sgd.sgdfback.model.Seguimiento;
+import com.sgd.sgdfback.model.Tramite;
 import com.sgd.sgdfback.model.Usuario;
+import com.sgd.sgdfback.model.UsuarioRol;
 import com.sgd.sgdfback.object.WorkflowSiguienteFormRequest;
 import com.sgd.sgdfback.object.WorkflowInicioRequest;
 
@@ -15,42 +25,64 @@ import com.sgd.sgdfback.object.WorkflowInicioRequest;
 public class WorkflowService {
 
     private WorkflowDAO workflowRepository;
+    private TramiteDAO tramiteDAO;
+    private SeguimientoDAO seguimientoDAO;
+    private FlujoDAO flujoDAO;
+    private ProcesoCondicionDAO procesoCondicionDAO;
+    private UsuarioRolDAO usuarioRolDAO;
 
-    public WorkflowService(WorkflowDAO workflowRepository) {
+    public WorkflowService(WorkflowDAO workflowRepository, TramiteDAO tramiteDAO, SeguimientoDAO seguimientoDAO, FlujoDAO flujoDAO, ProcesoCondicionDAO procesoCondicionDAO, UsuarioRolDAO usuarioRolDAO) {
         this.workflowRepository = workflowRepository;
-    }
-
+        this.tramiteDAO = tramiteDAO;
+        this.seguimientoDAO = seguimientoDAO;
+        this.flujoDAO = flujoDAO;
+        this.procesoCondicionDAO = procesoCondicionDAO;
+        this.usuarioRolDAO = usuarioRolDAO;
+    }   
+    
     public List<Map<String, Object>> inicioFlujo(Usuario user, WorkflowInicioRequest request) {
-        String flujo = request.getFlujo();
-        String formulario = request.getFormulario();
-        String comentario = "";
+        String nroTramite = null;
+        try {
+            String flujo = request.getFlujo();
+            String tipo = request.getFormulario();
+            String carrera = user.getUser_roles().get(0).getUnidad().getId();
+    
+            workflowRepository.createTramite(flujo, tipo, user.getId(), carrera);
+            nroTramite = workflowRepository.getLastTramiteIdByUserId(user.getId());
+            if (nroTramite == null) {
+                throw new RuntimeException("No se pudo obtener el ID del trámite insertado.");
+            }
 
-        String carrera = workflowRepository.getUnidadIdByUserId(user.getId());
+            Tramite t = tramiteDAO.findById(nroTramite).orElseThrow(() -> new RuntimeException("Trámite no encontrado"));
+            Flujo f = flujoDAO.findFlujoByFlujoAndProceso(flujo, "P1").orElseThrow(() -> new RuntimeException("Flujo no encontrado"));
+            UsuarioRol ur = usuarioRolDAO.findById(user.getUser_roles().get(0).getId()).orElseThrow(() -> new RuntimeException("UsuarioRol no encontrado"));
+    
+            Integer tiempo = f.getTiempo();
+            if (tiempo == null) {
+                throw new RuntimeException("No se pudo obtener el tiempo");
+            }
+            LocalDateTime fechaHoraFutura = LocalDateTime.now().plusHours(tiempo);
 
-        // Crear nuevo trámite y obtener su ID
-        workflowRepository.createTramite(flujo, formulario, user.getId(), carrera);
-
-        // Obtener el ID del trámite insertado
-        String nroTramite = workflowRepository.getLastTramiteIdByUserId(user.getId());
-
-        // Obtener el id del rol de usuario
-        Map<String, Object> roleData = workflowRepository.getRoleDataByUserId(user.getId());
-        Integer rolId = (Integer) roleData.get("id");
-        String unidadId = (String) roleData.get("unidad_id");
-
-        // Obtener tiempo del proceso
-        Integer tiempo = workflowRepository.getTiempoByFlujoAndProceso(flujo, "P1");
-
-        // Obtener la fecha y hora actual y sumar el tiempo del proceso
-        LocalDateTime fechaHoraFutura = LocalDateTime.now().plusHours(tiempo);
-
-        workflowRepository.crearSeguimiento(nroTramite, flujo, "P1", rolId, comentario, unidadId, user.getId(),
-                fechaHoraFutura);
-        
-
-        return workflowRepository.datos_tramite_hr(nroTramite);
+            Seguimiento seg = new Seguimiento();
+            seg.setTramite(t);
+            seg.setFlujo(f);
+            seg.setUsuarioRol(ur);
+            seg.setFecha_inicio(LocalDateTime.now());
+            seg.setEstado("pendiente");
+            seg.setTiempo(fechaHoraFutura);
+            seguimientoDAO.save(seg);
+    
+            return tramiteDAO.findDatosHojaRuta(nroTramite);
+        } catch (RuntimeException e) {
+            System.err.println("Error en inicioFlujo: " + e.getMessage());
+            throw new RuntimeException("Ocurrió un error al iniciar el flujo. " + e.getMessage(), e);
+    
+        } catch (Exception e) {
+            System.err.println("Error inesperado en inicioFlujo: " + e.getMessage());
+            throw new RuntimeException("Error inesperado en inicioFlujo. Por favor, inténtelo de nuevo más tarde.", e);
+        }
     }
-
+    
     public String siguienteFormulario(Usuario user, WorkflowSiguienteFormRequest request) {
         String flujo = request.getFlujo();
         String proceso = request.getProceso();
@@ -58,58 +90,66 @@ public class WorkflowService {
         String comentario = request.getComentario();
         String condicion = request.getCondicion();
 
-        String procesoSiguiente = workflowRepository.getProcesoSigByFlujoAndProceso(flujo, proceso);
-
+        Flujo f1 = flujoDAO.findFlujoByFlujoAndProceso(flujo, proceso).orElseThrow(() -> new RuntimeException("Flujo no encontrado"));
+        
+        String procesoSiguiente = f1.getProceso_sig();
         if (procesoSiguiente == null) {
-            procesoSiguiente = workflowRepository.getProcesoByCondicion(flujo, proceso, condicion);
+            if(condicion.equals("si")){
+                procesoSiguiente = f1.getProcesoCondicion().getSi();
+            } else {
+                procesoSiguiente = f1.getProcesoCondicion().getNo();
+            }
         }
 
-        Integer procesoObservado = workflowRepository.getProcesoObservadoCount(flujo, procesoSiguiente, tramiteId);
+        /*Integer procesoObservado = workflowRepository.getProcesoObservadoCount(flujo, procesoSiguiente, tramiteId);
 
         if (procesoObservado > 0) {
             workflowRepository.updateSeguimientoEstadoObservado(flujo, procesoSiguiente, tramiteId);
-        }
+        }*/
 
-        workflowRepository.updateSeguimientoFechaFin(flujo, proceso, tramiteId);
 
-        workflowRepository.updateTramiteProceso(flujo, procesoSiguiente, tramiteId);
+        Seguimiento s1 = seguimientoDAO.findByTramiteId(tramiteId, flujo, proceso).orElseThrow(() -> new RuntimeException("Seguimiento no encontrado"));
+        s1.setFecha_fin(LocalDateTime.now());
+        s1.setEstado("terminado");
+        seguimientoDAO.save(s1);
 
-        Map<String, Object> roleData = workflowRepository.getRoleDataByFlujoAndProceso(flujo, procesoSiguiente);
-        Integer rolId = (Integer) roleData.get("role_id");
+        Flujo f2 = flujoDAO.findFlujoByFlujoAndProceso(flujo, procesoSiguiente).orElseThrow(() -> new RuntimeException("Flujo no encontrado"));
+        
+        Integer tiempo = f2.getTiempo();
+        LocalDateTime fechaHoraFutura = LocalDateTime.now().plusHours(tiempo);        
+        Integer SigRolId = f2.getRole().getId();
+        String unidadId = user.getUser_roles().get(0).getUnidad().getId();
 
-        String carrera;
-        Integer siguienteUserId;
+        Tramite t1 = tramiteDAO.findById(tramiteId).orElseThrow(() -> new RuntimeException("Tramite no encontrado"));
+        t1.setProceso(procesoSiguiente);
 
-        if (rolId.equals(1) || rolId.equals(2) || rolId.equals(13) || rolId.equals(14)) {
-            Map<String, Object> userRole = workflowRepository.getUserRoleByRoleId(rolId);
-            siguienteUserId = (Integer) userRole.get("user_id");
-            carrera = (String) userRole.get("unidad_id");
-        } else if (rolId.equals(7)) {
-            Map<String, Object> tramite = workflowRepository.getTramiteById(tramiteId);
-            siguienteUserId = (Integer) tramite.get("user_id");
-            carrera = (String) tramite.get("carrera");
+        UsuarioRol ur = new UsuarioRol();
+        if(SigRolId.equals(1) || SigRolId.equals(2) || SigRolId.equals(13) || SigRolId.equals(14)){
+            ur = usuarioRolDAO.findRolUnidad(SigRolId, "FHCE").orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        } else if(SigRolId.equals(6) || SigRolId.equals(7)) {
+            ur = usuarioRolDAO.findUsuarioRolUnidad(SigRolId, unidadId, t1.getUser_id()).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));            
         } else {
-            carrera = workflowRepository.getCarreraByTramiteId(tramiteId);
-            siguienteUserId = workflowRepository.getUserIdByRoleIdAndCarrera(rolId, carrera); // ARREGLAR PARA ASIGNACION DE DOCENTES INTERINOS
+            ur = usuarioRolDAO.findRolUnidad(SigRolId, unidadId).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));            
         }
+        
+        LocalDateTime fechaFin = null;
+        if (procesoSiguiente.endsWith("Fin")) {
+            fechaFin = LocalDateTime.now();
+            t1.setEstado("terminado");
+        } 
+        tramiteDAO.save(t1);
 
-        Integer tiempo = workflowRepository.getTiempoByFlujoAndProceso(flujo, procesoSiguiente);
+        Seguimiento seg = new Seguimiento();
+            seg.setTramite(t1);
+            seg.setFlujo(f2);
+            seg.setUsuarioRol(ur);
+            seg.setFecha_fin(fechaFin);
+            seg.setFecha_inicio(LocalDateTime.now());
+            seg.setEstado("pendiente");
+            seg.setTiempo(fechaHoraFutura);
+            seg.setComentario(comentario);
+        seguimientoDAO.save(seg);
 
-        LocalDateTime fechaHoraFutura = LocalDateTime.now().plusHours(tiempo);
-
-        String[] partes = procesoSiguiente.split("-");
-        if (partes.length > 1) {
-            String x = partes[0] + "-" + partes[1];
-            workflowRepository.crearSeguimientoFin(tramiteId, flujo, x, rolId, comentario, carrera, siguienteUserId,
-                    fechaHoraFutura);
-
-            workflowRepository.updateTramiteEstadoTerminado(tramiteId, flujo);
-
-            return "Finalizado";
-        } else {
-            workflowRepository.crearSeguimiento(tramiteId, flujo, procesoSiguiente, rolId, comentario, carrera,
-                    siguienteUserId, fechaHoraFutura);
-            return "Siguiente Proceso";
-        }
+        return "Proceso Siguiente";
     }
 }

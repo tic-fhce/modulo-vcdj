@@ -1,13 +1,17 @@
 package com.sgd.sgdfback.model;
 
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name = "procesocond")
@@ -20,23 +24,25 @@ public class ProcesoCondicion {
     private String si;
     private String no;
 
-    @ManyToOne
-    @JoinColumn(name = "flujo_id")
-    private Flujo flujo2;
+
+    @OneToMany(mappedBy = "procesoCondicion")
+    @JsonIgnore
+    private List<Flujo> flujos;
 
 
     public ProcesoCondicion() {
     }
 
 
-    public ProcesoCondicion(Integer id, String flujo, String proceso, String si, String no, Flujo flujo2) {
+    public ProcesoCondicion(Integer id, String flujo, String proceso, String si, String no, List<Flujo> flujos) {
         this.id = id;
         this.flujo = flujo;
         this.proceso = proceso;
         this.si = si;
         this.no = no;
-        this.flujo2 = flujo2;
+        this.flujos = flujos;
     }
+
 
     public Integer getId() {
         return this.id;
@@ -78,12 +84,12 @@ public class ProcesoCondicion {
         this.no = no;
     }
 
-    public Flujo getFlujo2() {
-        return this.flujo2;
+    public List<Flujo> getFlujos() {
+        return this.flujos;
     }
 
-    public void setFlujo2(Flujo flujo2) {
-        this.flujo2 = flujo2;
+    public void setFlujos(List<Flujo> flujos) {
+        this.flujos = flujos;
     }
-
+    
 }

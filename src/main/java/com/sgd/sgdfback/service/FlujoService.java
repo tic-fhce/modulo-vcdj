@@ -1,23 +1,25 @@
 package com.sgd.sgdfback.service;
 
 import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.sgd.sgdfback.dao.FlujoDAO;
+import com.sgd.sgdfback.model.Flujo;
 
 @Service
-public class FlujoService {
+public interface FlujoService {
 
-    private final FlujoDAO flujoRepository;
+    List<Flujo> listarFlujosPorRoleIdYProceso(String username, String proceso);
 
-    public FlujoService(FlujoDAO flujoRepository) {
-        this.flujoRepository = flujoRepository;
-    }
+    void actualizarHabilitado(Integer id, String habilitado);
 
-    public List<Map<String, Object>> listarFlujosPorUsuarioYProceso(String username, String proceso) {
-        Integer roleId = flujoRepository.findRoleIdByUsername(username);
-        return flujoRepository.findFlujosByRoleIdAndProceso(roleId, proceso);
-    }
+    void actualizarProcedimiento(Integer id, String formulario, Integer rol, Integer tiempo);
+
+    // Métodos CRUD
+    Flujo crearFlujo(Flujo flujo);
+    Optional<Flujo> obtenerFlujoPorId(Integer id);
+    List<Flujo> obtenerTodosLosFlujos();
+    Flujo actualizarFlujo(Integer id, Flujo flujo);
+    void eliminarFlujo(Integer id);
 }

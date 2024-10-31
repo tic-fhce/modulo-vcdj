@@ -32,7 +32,7 @@ public class TramiteController {
         return convertToJsonResponse(list);
     }
 
-    @PostMapping("listarSeguimientoTramite")
+    @PostMapping("/listarSeguimientoTramite")
     public ResponseEntity<String> listarSeguimientoTramite(@AuthenticationPrincipal Usuario user) {
         List<Map<String, Object>> list = tramiteService.listarSeguimiento(user.getId());
         return convertToJsonResponse(list);

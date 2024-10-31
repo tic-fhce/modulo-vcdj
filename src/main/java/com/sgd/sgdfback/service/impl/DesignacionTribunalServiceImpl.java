@@ -52,6 +52,11 @@ public class DesignacionTribunalServiceImpl implements DesignacionTribunalServic
         }
     }
 
+    @Override
+    public List<DesignacionTribunal> obtenerAprobacionPerfilsCarreraYear(String carrera, Integer year){
+        return designacionTribunalRepository.findByCarreraAndYear(carrera, year);
+    }
+
     // Implementación del CRUD
     @Override
     public DesignacionTribunal crearDesignacion(DesignacionTribunal designacionTribunal) {

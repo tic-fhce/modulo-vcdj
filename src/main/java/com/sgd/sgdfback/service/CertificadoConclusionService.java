@@ -9,6 +9,8 @@ public interface CertificadoConclusionService {
     void actualizarColumna(String columna, String param, String nroTramite);
     String obtenerColumna(String nroTramite, String columna);
 
+    List<CertificadoConclusion> obtenerCertificadosCarreraYear(String carrera, Integer year);
+
     // Métodos CRUD
     CertificadoConclusion crearCertificadoConclusion(CertificadoConclusion certificadoConclusion);
     Optional<CertificadoConclusion> obtenerCertificadoConclusionPorId(Integer id);

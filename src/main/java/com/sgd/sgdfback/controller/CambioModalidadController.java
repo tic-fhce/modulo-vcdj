@@ -9,10 +9,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.sgd.sgdfback.model.CambioModalidad;
+import com.sgd.sgdfback.object.ListarCYRequest;
 import com.sgd.sgdfback.service.CambioModalidadService;
 
+
 @RestController
-@RequestMapping("/api/cambioModalidad")
+@RequestMapping("/cambioModalidad")
 public class CambioModalidadController {
 
     private final CambioModalidadService cambioService;
@@ -21,7 +23,7 @@ public class CambioModalidadController {
         this.cambioService = cambioModalidadService;
     }
 
-    @PatchMapping("/actualizar")
+    @PostMapping("/actualizar")
     public ResponseEntity<String> actualizar(@RequestBody Map<String, String> data) {
         try {
             String columna = data.get("colum");
@@ -58,6 +60,12 @@ public class CambioModalidadController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @PostMapping("/listar-carrera-year")
+    public List<CambioModalidad> getListarCarreraYear(@RequestBody ListarCYRequest request) {
+        return cambioService.obtenerCambioModCarreraYear(request.getCarrera(), request.getYear());
+    }
+    
 
     // Endpoints para el CRUD
     @PostMapping

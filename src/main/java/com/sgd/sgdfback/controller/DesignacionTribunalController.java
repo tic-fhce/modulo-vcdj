@@ -12,16 +12,18 @@ import org.springframework.web.bind.annotation.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sgd.sgdfback.model.DesignacionTribunal;
 import com.sgd.sgdfback.model.Usuario;
+import com.sgd.sgdfback.object.ListarCYRequest;
 import com.sgd.sgdfback.service.DesignacionTribunalService;
 
 @RestController
-@RequestMapping("/api/designacionTribunal")
+@RequestMapping("/designacionTribunal")
 public class DesignacionTribunalController {
 
     private final DesignacionTribunalService designacionService;
     private final ObjectMapper objectMapper;
 
-    public DesignacionTribunalController(DesignacionTribunalService designacionTribunalService, ObjectMapper objectMapper){
+    public DesignacionTribunalController(DesignacionTribunalService designacionTribunalService,
+            ObjectMapper objectMapper) {
         this.designacionService = designacionTribunalService;
         this.objectMapper = objectMapper;
     }
@@ -54,11 +56,13 @@ public class DesignacionTribunalController {
     }
 
     @PostMapping("/aprobacionPerfil")
-    public ResponseEntity<String> obtenerAprobacionPerfil(@AuthenticationPrincipal Usuario user, @RequestBody(required = false) Map<String, String> data) {
+    public ResponseEntity<String> obtenerAprobacionPerfil(@AuthenticationPrincipal Usuario user,
+            @RequestBody(required = false) Map<String, String> data) {
         Integer authUserId = user.getId();
         List<DesignacionTribunal> perfil = designacionService.obtenerAprobacionPerfilPorUsuario(authUserId);
 
-        // Si el resultado está vacío, intenta buscar por el userId proporcionado en el request
+        // Si el resultado está vacío, intenta buscar por el userId proporcionado en el
+        // request
         if (perfil.isEmpty() && data != null && data.containsKey("idPerfil")) {
             Integer idPerfil = Integer.parseInt(data.get("idPerfil"));
             Optional<DesignacionTribunal> perfilOpcional = designacionService.obtenerDesignacionPorId(idPerfil);
@@ -66,6 +70,11 @@ public class DesignacionTribunalController {
         }
 
         return ResponseEntity.ok(convertToJsonResponse(perfil));
+    }
+
+    @PostMapping("/listar-carrera-year")
+    public List<DesignacionTribunal> getListarCarreraYear(@RequestBody ListarCYRequest request) {
+        return designacionService.obtenerAprobacionPerfilsCarreraYear(request.getCarrera(), request.getYear());
     }
 
     private String convertToJsonResponse(List<DesignacionTribunal> list) {
@@ -95,7 +104,8 @@ public class DesignacionTribunalController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<DesignacionTribunal> actualizarDesignacion(@PathVariable Integer id, @RequestBody DesignacionTribunal designacionTribunal) {
+    public ResponseEntity<DesignacionTribunal> actualizarDesignacion(@PathVariable Integer id,
+            @RequestBody DesignacionTribunal designacionTribunal) {
         DesignacionTribunal designacionActualizada = designacionService.actualizarDesignacion(id, designacionTribunal);
         if (designacionActualizada != null) {
             return ResponseEntity.ok(designacionActualizada);

@@ -17,47 +17,42 @@ public class Seguimiento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String flujo;
-    private String proceso;
     private LocalDateTime fecha_inicio;
     private LocalDateTime fecha_fin;
     private String estado;
     private String comentario;
-    private String carrera;
     @Column(columnDefinition = "VARCHAR(6) DEFAULT 'false'")
     private String visto;
     private LocalDateTime tiempo;
-
-    @ManyToOne
-    @JoinColumn(name = "role_id")
-    private Rol role;
 
     @ManyToOne
     @JoinColumn(name = "tramite_id")
     private Tramite tramite;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private Usuario user;
+    @JoinColumn(name = "usuarioRol_id")
+    private UsuarioRol usuarioRol;
+
+    @ManyToOne
+    @JoinColumn(name = "flujo_id")
+    private Flujo flujo;
 
 
     public Seguimiento() {
     }
 
-    public Seguimiento(Integer id, String flujo, String proceso, LocalDateTime fecha_inicio, LocalDateTime fecha_fin, String estado, String comentario, String carrera, String visto, LocalDateTime tiempo, Rol role, Tramite tramite, Usuario user) {
+
+    public Seguimiento(Integer id, LocalDateTime fecha_inicio, LocalDateTime fecha_fin, String estado, String comentario, String visto, LocalDateTime tiempo, Tramite tramite, UsuarioRol usuarioRol, Flujo flujo) {
         this.id = id;
-        this.flujo = flujo;
-        this.proceso = proceso;
         this.fecha_inicio = fecha_inicio;
         this.fecha_fin = fecha_fin;
         this.estado = estado;
         this.comentario = comentario;
-        this.carrera = carrera;
         this.visto = visto;
         this.tiempo = tiempo;
-        this.role = role;
         this.tramite = tramite;
-        this.user = user;
+        this.usuarioRol = usuarioRol;
+        this.flujo = flujo;
     }
 
     public Integer getId() {
@@ -66,22 +61,6 @@ public class Seguimiento {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getFlujo() {
-        return this.flujo;
-    }
-
-    public void setFlujo(String flujo) {
-        this.flujo = flujo;
-    }
-
-    public String getProceso() {
-        return this.proceso;
-    }
-
-    public void setProceso(String proceso) {
-        this.proceso = proceso;
     }
 
     public LocalDateTime getFecha_inicio() {
@@ -116,14 +95,6 @@ public class Seguimiento {
         this.comentario = comentario;
     }
 
-    public String getCarrera() {
-        return this.carrera;
-    }
-
-    public void setCarrera(String carrera) {
-        this.carrera = carrera;
-    }
-
     public String getVisto() {
         return this.visto;
     }
@@ -140,14 +111,6 @@ public class Seguimiento {
         this.tiempo = tiempo;
     }
 
-    public Rol getRole() {
-        return this.role;
-    }
-
-    public void setRole(Rol role) {
-        this.role = role;
-    }
-
     public Tramite getTramite() {
         return this.tramite;
     }
@@ -156,13 +119,24 @@ public class Seguimiento {
         this.tramite = tramite;
     }
 
-    public Usuario getUser() {
-        return this.user;
+    public UsuarioRol getUsuarioRol() {
+        return this.usuarioRol;
     }
 
-    public void setUser(Usuario user) {
-        this.user = user;
+    public void setUsuarioRol(UsuarioRol usuarioRol) {
+        this.usuarioRol = usuarioRol;
     }
 
+    public Flujo getFlujo() {
+        return this.flujo;
+    }
 
+    public void setFlujo(Flujo flujo) {
+        this.flujo = flujo;
+    }
+    
+
+
+
+    
 }

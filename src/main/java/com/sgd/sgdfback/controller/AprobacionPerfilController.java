@@ -9,10 +9,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.sgd.sgdfback.model.AprobacionPerfil;
+import com.sgd.sgdfback.object.ListarCYRequest;
 import com.sgd.sgdfback.service.AprobacionPerfilService;
+import org.springframework.web.bind.annotation.GetMapping;
+
 
 @RestController
-@RequestMapping("/api/aprobacionPerfil")
+@RequestMapping("/aprobacionPerfil")
 public class AprobacionPerfilController {
 
     private final AprobacionPerfilService aprobacionService;
@@ -48,6 +51,12 @@ public class AprobacionPerfilController {
         }
     }
 
+    @PostMapping("/listar-carrera-year")
+    public List<AprobacionPerfil> getListarCarreraYear(@RequestBody ListarCYRequest request) {
+        return aprobacionService.obtenerAprobacionPerfilsCarreraYear(request.getCarrera(), request.getYear());
+    }
+    
+
     // Endpoints para el CRUD
     @PostMapping
     public ResponseEntity<AprobacionPerfil> crearAprobacionPerfil(@RequestBody AprobacionPerfil aprobacionPerfil) {
@@ -60,7 +69,7 @@ public class AprobacionPerfilController {
         return aprobacionPerfil.map(ResponseEntity::ok).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @GetMapping
+    @GetMapping("/listar")
     public List<AprobacionPerfil> obtenerTodosLosAprobacionPerfil() {
         return aprobacionService.obtenerTodosLosAprobacionPerfil();
     }

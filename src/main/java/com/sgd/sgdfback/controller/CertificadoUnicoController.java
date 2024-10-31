@@ -9,10 +9,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.sgd.sgdfback.model.CertificadoUnico;
+import com.sgd.sgdfback.object.ListarCYRequest;
 import com.sgd.sgdfback.service.CertificadoUnicoService;
 
 @RestController
-@RequestMapping("/api/certificadoUnico")
+@RequestMapping("/certificadoUnico")
 public class CertificadoUnicoController {
 
     private final CertificadoUnicoService certificadoService;
@@ -46,6 +47,11 @@ public class CertificadoUnicoController {
         } catch (Exception e) {
             return new ResponseEntity<>("Error al obtener: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @PostMapping("/listar-carrera-year")
+    public List<CertificadoUnico> getListarCarreraYear(@RequestBody ListarCYRequest request) {
+        return certificadoService.obtenerCertificadosCarreraYear(request.getCarrera(), request.getYear());
     }
 
     // Endpoints para el CRUD

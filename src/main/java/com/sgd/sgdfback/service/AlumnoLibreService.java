@@ -11,6 +11,8 @@ public interface AlumnoLibreService {
     void actualizarColumna(AlumnoLibreActColRequest actualizarDTO);
     String obtenerColumna(AlumnoLibreObtColRequest obtenerDTO);
 
+    List<AlumnoLibre> obtenerAlumnoLibreCarreraYear(String carrera, Integer year);
+
     // Métodos CRUD
     AlumnoLibre crearAlumno(AlumnoLibre alumnoLibre);
     Optional<AlumnoLibre> obtenerAlumnoPorId(Integer id);

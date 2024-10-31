@@ -34,22 +34,16 @@ public class Rol {
 
     @OneToMany(mappedBy = "role")
     @JsonIgnore
-    private List<Seguimiento> seguimientos;
-
-    @OneToMany(mappedBy = "role")
-    @JsonIgnore
     private List<UsuarioRol> user_roles;
-    
 
     public Rol() {
     }
 
-    public Rol(Integer id, RolNombre name, String codigo, List<Flujo> flujos, List<Seguimiento> seguimientos, List<UsuarioRol> user_roles) {
+    public Rol(Integer id, RolNombre name, String codigo, List<Flujo> flujos, List<UsuarioRol> user_roles) {
         this.id = id;
         this.name = name;
         this.codigo = codigo;
         this.flujos = flujos;
-        this.seguimientos = seguimientos;
         this.user_roles = user_roles;
     }
 
@@ -85,14 +79,6 @@ public class Rol {
         this.flujos = flujos;
     }
 
-    public List<Seguimiento> getSeguimientos() {
-        return this.seguimientos;
-    }
-
-    public void setSeguimientos(List<Seguimiento> seguimientos) {
-        this.seguimientos = seguimientos;
-    }
-
     public List<UsuarioRol> getUser_roles() {
         return this.user_roles;
     }
@@ -100,5 +86,6 @@ public class Rol {
     public void setUser_roles(List<UsuarioRol> user_roles) {
         this.user_roles = user_roles;
     }
+    
 
 }

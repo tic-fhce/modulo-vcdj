@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "flujo")
 public class Flujo {
@@ -22,32 +24,42 @@ public class Flujo {
     private String proceso_sig;
     private String formulario;
     private Integer tiempo;
-    
+    private String habilitado;
 
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Rol role;
 
-    @OneToMany(mappedBy = "flujo")
-    private List<ProcesoCondicion> procesos_cond;
+    @ManyToOne
+    @JoinColumn(name = "procesocond_id")
+    private ProcesoCondicion procesoCondicion;
 
     @ManyToOne
     @JoinColumn(name = "categoria_id")
+    @JsonIgnore
     private Categoria categoria;
+
+    @OneToMany(mappedBy = "flujo")
+    @JsonIgnore
+    private List<Flujo> flujos;
+
+
 
     public Flujo() {
     }
 
-    public Flujo(Integer id, String flujo, String proceso, String proceso_sig, String formulario, Integer tiempo, Rol role, List<ProcesoCondicion> procesos_cond, Categoria categoria) {
+    public Flujo(Integer id, String flujo, String proceso, String proceso_sig, String formulario, Integer tiempo, String habilitado, Rol role, ProcesoCondicion procesoCondicion, Categoria categoria, List<Flujo> flujos) {
         this.id = id;
         this.flujo = flujo;
         this.proceso = proceso;
         this.proceso_sig = proceso_sig;
         this.formulario = formulario;
         this.tiempo = tiempo;
+        this.habilitado = habilitado;
         this.role = role;
-        this.procesos_cond = procesos_cond;
+        this.procesoCondicion = procesoCondicion;
         this.categoria = categoria;
+        this.flujos = flujos;
     }
 
     public Integer getId() {
@@ -98,6 +110,14 @@ public class Flujo {
         this.tiempo = tiempo;
     }
 
+    public String getHabilitado() {
+        return this.habilitado;
+    }
+
+    public void setHabilitado(String habilitado) {
+        this.habilitado = habilitado;
+    }
+
     public Rol getRole() {
         return this.role;
     }
@@ -106,12 +126,12 @@ public class Flujo {
         this.role = role;
     }
 
-    public List<ProcesoCondicion> getProcesos_cond() {
-        return this.procesos_cond;
+    public ProcesoCondicion getProcesoCondicion() {
+        return this.procesoCondicion;
     }
 
-    public void setProcesos_cond(List<ProcesoCondicion> procesos_cond) {
-        this.procesos_cond = procesos_cond;
+    public void setProcesoCondicion(ProcesoCondicion procesoCondicion) {
+        this.procesoCondicion = procesoCondicion;
     }
 
     public Categoria getCategoria() {
@@ -122,4 +142,14 @@ public class Flujo {
         this.categoria = categoria;
     }
 
+    public List<Flujo> getFlujos() {
+        return this.flujos;
+    }
+
+    public void setFlujos(List<Flujo> flujos) {
+        this.flujos = flujos;
+    }
+
+
+   
 }

@@ -9,6 +9,8 @@ public interface MateriaExtraService {
     void actualizarColumna(String columna, String param, String nroTramite);
     String obtenerColumna(String nroTramite, String columna);
 
+    List<MateriaExtra> obtenerMateriaExtCarreraYear(String carrera, Integer year);
+
     // Métodos CRUD
     MateriaExtra crearMateriaExtra(MateriaExtra materiaExtra);
     Optional<MateriaExtra> obtenerMateriaExtraPorId(Integer id);

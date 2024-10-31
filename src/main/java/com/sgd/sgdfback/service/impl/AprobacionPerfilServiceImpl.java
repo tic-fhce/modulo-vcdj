@@ -10,6 +10,8 @@ import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 @Service
 public class AprobacionPerfilServiceImpl implements AprobacionPerfilService {
 
@@ -52,6 +54,15 @@ public class AprobacionPerfilServiceImpl implements AprobacionPerfilService {
         }
     }
 
+    @Override
+    public List<AprobacionPerfil> obtenerAprobacionPerfilsCarreraYear(String carrera, Integer year){
+        return aprobacionPerfilRepository.findByCarreraAndYear(carrera, year);
+    }
+
+
+
+
+
     // Implementación del CRUD
     @Override
     public AprobacionPerfil crearAprobacionPerfil(AprobacionPerfil aprobacionPerfil) {
@@ -64,6 +75,7 @@ public class AprobacionPerfilServiceImpl implements AprobacionPerfilService {
     }
 
     @Override
+    @Transactional
     public List<AprobacionPerfil> obtenerTodosLosAprobacionPerfil() {
         return aprobacionPerfilRepository.findAll();
     }

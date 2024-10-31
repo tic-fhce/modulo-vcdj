@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "tramite")
 public class Tramite {
@@ -24,15 +26,19 @@ public class Tramite {
     private LocalDateTime creacion;
 
     @OneToMany(mappedBy = "tramite")
+    @JsonIgnore
     private List<Seguimiento> seguimientos;
 
     @OneToMany(mappedBy = "tramite")
+    @JsonIgnore
     private List<AprobacionPerfil> aprobacion_Perfils;
 
     @OneToMany(mappedBy = "tramite")
+    @JsonIgnore
     private List<Convocatoria> convocatorias;
     
     @OneToMany(mappedBy = "tramite")
+    @JsonIgnore
     private List<DesignacionTribunal> designacion_Tribunals;
 
     public Tramite(String id) {

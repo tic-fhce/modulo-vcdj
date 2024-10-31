@@ -71,6 +71,11 @@ public class CambioModalidadServiceImpl implements CambioModalidadService {
         }
     }
 
+    @Override
+    public List<CambioModalidad> obtenerCambioModCarreraYear(String carrera, Integer year){
+        return cambioModalidadRepository.findByCarreraAndYear(carrera, year);
+    }
+
     // Implementación del CRUD
     @Override
     public CambioModalidad crearCambioModalidad(CambioModalidad cambioModalidad) {

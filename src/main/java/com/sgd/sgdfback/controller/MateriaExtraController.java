@@ -9,10 +9,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.sgd.sgdfback.model.MateriaExtra;
+import com.sgd.sgdfback.object.ListarCYRequest;
 import com.sgd.sgdfback.service.MateriaExtraService;
 
 @RestController
-@RequestMapping("/api/materiaExtra")
+@RequestMapping("/materiaExtra")
 public class MateriaExtraController {
 
     private final MateriaExtraService materiaService;
@@ -46,6 +47,11 @@ public class MateriaExtraController {
         } catch (Exception e) {
             return new ResponseEntity<>("Error al obtener: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @PostMapping("/listar-carrera-year")
+    public List<MateriaExtra> getListarCarreraYear(@RequestBody ListarCYRequest request) {
+        return materiaService.obtenerMateriaExtCarreraYear(request.getCarrera(), request.getYear());
     }
 
     // Endpoints para el CRUD

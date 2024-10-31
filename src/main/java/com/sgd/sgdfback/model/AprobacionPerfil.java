@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "aprobacion_perfil")
 public class AprobacionPerfil {
@@ -45,9 +47,11 @@ public class AprobacionPerfil {
     private String c_resolucion_perfil;
 
     @OneToMany(mappedBy = "aprobacion_Perfil")
+    @JsonIgnore
     private List<DesignacionTribunal> designacion_Tribunals;
 
     @OneToMany(mappedBy = "aprobacion_Perfil")
+    @JsonIgnore
     private List<CambioModalidad> cambio_Modalidads;
 
     @ManyToOne
