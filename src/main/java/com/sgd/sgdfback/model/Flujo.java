@@ -1,11 +1,14 @@
 package com.sgd.sgdfback.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -36,13 +39,16 @@ public class Flujo {
     @JsonIgnore
     private Categoria categoria;
 
+    @OneToMany(mappedBy = "flujo")
+    @JsonIgnore
+    private List<Flujo> flujos;
+
 
 
     public Flujo() {
     }
 
-
-    public Flujo(Integer id, String flujo, String proceso, String proceso_sig, String formulario, Integer tiempo, String habilitado, Rol role, ProcesoCondicion procesoCondicion, Categoria categoria) {
+    public Flujo(Integer id, String flujo, String proceso, String proceso_sig, String formulario, Integer tiempo, String habilitado, Rol role, ProcesoCondicion procesoCondicion, Categoria categoria, List<Flujo> flujos) {
         this.id = id;
         this.flujo = flujo;
         this.proceso = proceso;
@@ -53,6 +59,7 @@ public class Flujo {
         this.role = role;
         this.procesoCondicion = procesoCondicion;
         this.categoria = categoria;
+        this.flujos = flujos;
     }
 
     public Integer getId() {
@@ -134,5 +141,15 @@ public class Flujo {
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
-    
+
+    public List<Flujo> getFlujos() {
+        return this.flujos;
+    }
+
+    public void setFlujos(List<Flujo> flujos) {
+        this.flujos = flujos;
+    }
+
+
+   
 }

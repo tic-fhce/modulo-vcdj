@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sgd.sgdfback.model.Usuario;
 import com.sgd.sgdfback.object.WorkflowSiguienteFormRequest;
 import com.sgd.sgdfback.object.WorkflowInicioRequest;
@@ -23,35 +22,19 @@ public class WorkflowController {
 
     @Autowired
     private final WorkflowService workflowService;
-    private final ObjectMapper objectMapper;
 
-    public WorkflowController(WorkflowService workflowService, ObjectMapper objectMapper){
+    public WorkflowController(WorkflowService workflowService){
         this.workflowService = workflowService;
-        this.objectMapper = objectMapper;
     }
 
     @PostMapping("/inicioFlujo")
-    public ResponseEntity<String> inicioFlujo(@AuthenticationPrincipal Usuario user,
-            @RequestBody WorkflowInicioRequest request) {
-        List<Map<String, Object>> list = workflowService.inicioFlujo(user, request);
-        return convertToJsonResponse(list);
+    public List<Map<String, Object>> inicioFlujo(@AuthenticationPrincipal Usuario usuario, @RequestBody WorkflowInicioRequest request) {
+        return workflowService.inicioFlujo(usuario, request);
     }
 
     @PostMapping("/siguienteFormulario")
-    public ResponseEntity<String> siguienteFormulario(@AuthenticationPrincipal Usuario user,
-            @RequestBody WorkflowSiguienteFormRequest request) {
+    public ResponseEntity<String> siguienteFormulario(@AuthenticationPrincipal Usuario user, @RequestBody WorkflowSiguienteFormRequest request) {
         String response = workflowService.siguienteFormulario(user, request);
         return ResponseEntity.ok(response);
-    }
-
-    private ResponseEntity<String> convertToJsonResponse(List<Map<String, Object>> list) {
-        String jsonResult = null;
-        try {
-            jsonResult = objectMapper.writeValueAsString(list);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(500).body("Error al convertir a JSON");
-        }
-        return ResponseEntity.ok(jsonResult);
     }
 }

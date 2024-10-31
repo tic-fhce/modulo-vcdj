@@ -37,10 +37,6 @@ public class Usuario implements UserDetails {
     private String password;
     private String cif;
 
-    @OneToMany(mappedBy = "user")
-    @JsonIgnore
-    private List<Seguimiento> seguimientos;
-
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     @JsonIgnore
     private List<UsuarioRol> user_roles;
@@ -75,14 +71,14 @@ public class Usuario implements UserDetails {
     public Usuario() {
     }
 
-    public Usuario(Integer id, String username, String password, String cif, List<Seguimiento> seguimientos, List<UsuarioRol> user_roles) {
+
+    public Usuario(Integer id, String username, String password, String cif, List<UsuarioRol> user_roles) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.cif = cif;
-        this.seguimientos = seguimientos;
         this.user_roles = user_roles;
-    }
+    }    
 
     private Usuario(builder builder) {
         this.id = builder.id;
@@ -121,14 +117,6 @@ public class Usuario implements UserDetails {
 
     public void setCif(String cif) {
         this.cif = cif;
-    }
-
-    public List<Seguimiento> getSeguimientos() {
-        return this.seguimientos;
-    }
-
-    public void setSeguimientos(List<Seguimiento> seguimientos) {
-        this.seguimientos = seguimientos;
     }
 
     public List<UsuarioRol> getUser_roles() {

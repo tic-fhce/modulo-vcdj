@@ -1,12 +1,17 @@
 package com.sgd.sgdfback.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "user_role")
@@ -28,16 +33,22 @@ public class UsuarioRol {
     @JoinColumn(name = "unidad_id")
     private Unidad unidad;
 
+    @OneToMany(mappedBy = "usuarioRol")
+    private List<Seguimiento> seguimientos;
+
 
     public UsuarioRol() {
     }
 
-    public UsuarioRol(Integer id, Rol role, Usuario user, Unidad unidad) {
+
+    public UsuarioRol(Integer id, Rol role, Usuario user, Unidad unidad, List<Seguimiento> seguimientos) {
         this.id = id;
         this.role = role;
         this.user = user;
         this.unidad = unidad;
+        this.seguimientos = seguimientos;
     }
+    
 
     public Integer getId() {
         return this.id;
@@ -69,6 +80,14 @@ public class UsuarioRol {
 
     public void setUnidad(Unidad unidad) {
         this.unidad = unidad;
+    }
+
+    public List<Seguimiento> getSeguimientos() {
+        return this.seguimientos;
+    }
+
+    public void setSeguimientos(List<Seguimiento> seguimientos) {
+        this.seguimientos = seguimientos;
     }
 
 }

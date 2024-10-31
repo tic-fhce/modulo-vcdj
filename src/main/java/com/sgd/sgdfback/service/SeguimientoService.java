@@ -6,64 +6,25 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.sgd.sgdfback.dao.SeguimientoDAO;
+import com.sgd.sgdfback.model.Seguimiento;
+import com.sgd.sgdfback.model.Usuario;
 
 @Service
-public class SeguimientoService {
+public interface SeguimientoService {
+    List<Map<String, Object>> listarSeguimientos();
+    List<Map<String, Object>> listarTramitesPendientes(Usuario user);
+    List<Map<String, Object>> listarTramitesConcluidos(Usuario user);
+    List<Map<String, Object>> listarHR(Usuario user);
+    Integer countTramitesPend(Usuario user);
+    Integer countTramitesConcl(Usuario user);
+    void activateV(Integer id);
 
-    private final SeguimientoDAO seguimientoRepository;
 
-    public SeguimientoService(SeguimientoDAO seguimientoRepository) {
-        this.seguimientoRepository = seguimientoRepository;
-    }
+    // CRUD
+    Seguimiento crearSeguimiento(Seguimiento seguimiento);
+    Optional<Seguimiento> obtenerSeguimientoPorId(Integer id);
+    List<Seguimiento> obtenerTodosLosSeguimientos();
+    Seguimiento actualizarFlujo(Integer id, Seguimiento seguimiento);
+    void eliminarSeguimiento(Integer id);
     
-
-    public List<Map<String, Object>> listarSeguimientos() {
-        return seguimientoRepository.findAllSeguimientos();
-    }
-
-    public List<Map<String, Object>> listarTramitesPendientes(Integer userId) {
-        Optional<Map<String, Object>> roleAndUnidad = seguimientoRepository.findRoleAndUnidadByUserId(userId);
-        Map<String, Object> resultMap = roleAndUnidad.get();
-        Integer rolId = (Integer) resultMap.get("rolId");
-        String unidadId = (String) resultMap.get("unidadId");
-        return seguimientoRepository.findPendientesByUserRoleAndCarrera(rolId, unidadId, userId);
-    }
-
-    public List<Map<String, Object>> listarTramitesConcluidos(Integer userId) {
-        Optional<Map<String, Object>> roleAndUnidad = seguimientoRepository.findRoleAndUnidadByUserId(userId);
-        Map<String, Object> resultMap = roleAndUnidad.get();
-        Integer rolId = (Integer) resultMap.get("rolId");
-        String unidadId = (String) resultMap.get("unidadId");
-        return seguimientoRepository.findConcluidosByUserRoleAndCarrera(rolId, unidadId, userId);
-    }
-
-    public List<Map<String, Object>> listarHR(Integer userId) {
-        Optional<Map<String, Object>> roleAndUnidad = seguimientoRepository.findRoleAndUnidadByUserId(userId);
-        Map<String, Object> resultMap = roleAndUnidad.get();
-        Integer rolId = (Integer) resultMap.get("rolId");
-        String unidadId = (String) resultMap.get("unidadId");
-        return seguimientoRepository.findHR(rolId, unidadId, userId);
-    }
-
-    public Integer countTramitesPend(Integer userId){
-        Optional<Map<String, Object>> roleAndUnidad = seguimientoRepository.findRoleAndUnidadByUserId(userId);
-        Map<String, Object> resultMap = roleAndUnidad.get();
-        Integer rolId = (Integer) resultMap.get("rolId");
-        String unidadId = (String) resultMap.get("unidadId");
-        return seguimientoRepository.countTramitesPendientes(rolId, unidadId, userId);
-    }
-
-    public Integer countTramitesConcl(Integer userId){
-        Optional<Map<String, Object>> roleAndUnidad = seguimientoRepository.findRoleAndUnidadByUserId(userId);
-        Map<String, Object> resultMap = roleAndUnidad.get();
-        Integer rolId = (Integer) resultMap.get("rolId");
-        String unidadId = (String) resultMap.get("unidadId");
-        return seguimientoRepository.countTramitesConcluidos(rolId, unidadId, userId);
-    }
-
-    public void activateV(String flujo, String proceso, String nroTramite) {
-        seguimientoRepository.activateVisto(flujo, proceso, nroTramite);
-    }
 }
-

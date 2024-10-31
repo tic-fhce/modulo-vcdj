@@ -11,75 +11,53 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sgd.sgdfback.model.Usuario;
 import com.sgd.sgdfback.service.SeguimientoService;
 
 @RestController
-@RequestMapping("/api/seguimiento")
+@RequestMapping("/seguimiento")
 public class SeguimientoController {
 
     private final SeguimientoService seguimientoService;
-    private final ObjectMapper objectMapper;
 
-    public SeguimientoController(SeguimientoService seguimientoService, ObjectMapper objectMapper){
+    public SeguimientoController(SeguimientoService seguimientoService){
         this.seguimientoService = seguimientoService;
-        this.objectMapper = objectMapper;
     }
 
     @GetMapping("/listar")
-    public ResponseEntity<String> listar() {
-        List<Map<String, Object>> list = seguimientoService.listarSeguimientos();
-        return convertToJsonResponse(list);
+    public List<Map<String, Object>> listar() {
+        return seguimientoService.listarSeguimientos();
     }
 
     @GetMapping("/tramitePendiente")
-    public ResponseEntity<String> listarTramitesPendientes(@AuthenticationPrincipal Usuario user) {
-        List<Map<String, Object>> pendientesList = seguimientoService.listarTramitesPendientes(user.getId());
-        return convertToJsonResponse(pendientesList);
+    public List<Map<String, Object>> listarTramitesPendientes(@AuthenticationPrincipal Usuario user) {
+        return seguimientoService.listarTramitesPendientes(user);
     }
 
     @GetMapping("/tramiteConcluido")
-    public ResponseEntity<String> listarTramitesConcluidos(@AuthenticationPrincipal Usuario user) {
-        List<Map<String, Object>> concluidosList = seguimientoService.listarTramitesConcluidos(user.getId());
-        return convertToJsonResponse(concluidosList);
+    public List<Map<String, Object>> listarTramitesConcluidos(@AuthenticationPrincipal Usuario user) {
+        return seguimientoService.listarTramitesConcluidos(user);
     }
 
     @GetMapping("/hojarutaAtendida")
-    public ResponseEntity<String> listarhojasrutaAtendidas(@AuthenticationPrincipal Usuario user) {
-        List<Map<String, Object>> hrAtendidas = seguimientoService.listarHR(user.getId());
-        return convertToJsonResponse(hrAtendidas);
+    public List<Map<String, Object>> listarhojasrutaAtendidas(@AuthenticationPrincipal Usuario user) {
+        return seguimientoService.listarHR(user);
     }
 
     @GetMapping("/countTramitesPendientes")
     public Integer countTramPend(@AuthenticationPrincipal Usuario user) {
-        return seguimientoService.countTramitesPend(user.getId());
+        return seguimientoService.countTramitesPend(user);
     }
 
     @GetMapping("/countTramitesConcluidos")
     public Integer countTramConcl(@AuthenticationPrincipal Usuario user) {
-        return seguimientoService.countTramitesConcl(user.getId());
+        return seguimientoService.countTramitesConcl(user);
     }
     
-
     @PostMapping("/visto")
     public ResponseEntity<String> visto(@RequestBody Map<String, String> data) {
-        String flujo = data.get("flujo");
-        String proceso = data.get("proceso");
-        String nroTramite = data.get("nroTramite");
-
-        seguimientoService.activateV(flujo, proceso, nroTramite);
+        Integer id = Integer.parseInt(data.get("id"));
+        seguimientoService.activateV(id);
         return ResponseEntity.ok("Actualizado");
-    }
-
-    private ResponseEntity<String> convertToJsonResponse(List<Map<String, Object>> list) {
-        String jsonResult = null;
-        try {
-            jsonResult = objectMapper.writeValueAsString(list);
-        } catch (Exception e) {
-            e.printStackTrace(); // Manejo de errores
-            return ResponseEntity.status(500).body("Error al convertir a JSON");
-        }
-        return ResponseEntity.ok(jsonResult);
     }
 }

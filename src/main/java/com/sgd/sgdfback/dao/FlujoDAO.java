@@ -8,21 +8,21 @@ import org.springframework.stereotype.Repository;
 import com.sgd.sgdfback.model.Flujo;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
-public interface FlujoDAO extends JpaRepository<Flujo, Integer>{
+public interface FlujoDAO extends JpaRepository<Flujo, Integer> {
 
-    @Query("SELECT f FROM Flujo f " +
-           "WHERE f.role.id = :roleId " +
-           "AND f.habilitado = 'true' " +
-           "AND (f.proceso = :proceso OR f.proceso LIKE CONCAT(:proceso, '-%'))")
-    List<Flujo> findFlujosByRoleIdAndProceso(@Param("roleId") Integer roleId, 
-                                             @Param("proceso") String proceso);
+       @Query("SELECT f FROM Flujo f " +
+                     "WHERE f.role.id = :roleId " +
+                     "AND f.habilitado = 'true' " +
+                     "AND (f.proceso = :proceso OR f.proceso LIKE CONCAT(:proceso, '-%'))")
+       List<Flujo> findFlujosByRoleIdAndProceso(@Param("roleId") Integer roleId,
+                     @Param("proceso") String proceso);
 
-    
-    // @Query("SELECT f FROM Flujo f LEFT JOIN FETCH f.procesos_cond")
-    // List<Flujo> findAllWithProcesoCondicion();
+       @Query("SELECT f FROM Flujo f WHERE f.flujo = :flujo AND f.proceso = :proceso")
+       Optional<Flujo> findFlujoByFlujoAndProceso(@Param("flujo") String flujo, @Param("proceso") String proceso);
 
-    // @Query("SELECT f, pc FROM Flujo f LEFT JOIN ProcesoCondicion pc ON pc.flujo.id = f.id")
-    // List<Object[]> findAllFlujosWithProcesoCondicion();
+       /*@Query("SELECT f.tiempo FROM Flujo f WHERE f.flujo = :flujo AND f.proceso = :proceso")
+       Integer getTiempoByFlujoAndProceso(@Param("flujo") String flujo, @Param("proceso") String proceso);*/
 }
