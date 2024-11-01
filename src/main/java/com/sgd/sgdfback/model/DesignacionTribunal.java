@@ -15,10 +15,9 @@ public class DesignacionTribunal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Integer userId;
-    private Integer cartaIdfxfda;
 
     private Long cif;
-    
+
     private String d_nota_suficiencia_tutor;
     private String d_trabajo_grado;
     private String d_carta_conclusion_institucion;
@@ -42,14 +41,17 @@ public class DesignacionTribunal {
     @JoinColumn(name = "tramite_id")
     private Tramite tramite;
 
-
     public DesignacionTribunal() {
     }
 
-    public DesignacionTribunal(Integer id, Integer userId, Integer cartaIdfxfda, Long cif, String d_nota_suficiencia_tutor, String d_trabajo_grado, String d_carta_conclusion_institucion, String d_solicitud_tribunal, String d_proyecto_resolucion_tribunal, String d_resolucion_tribunal, String r_nota_suficiencia_tutor, String r_trabajo_grado, String r_carta_conclusion_institucion, String c_solicitud_tribunal, String c_proyecto_resolucion_tribunal, String c_resolucion_tribunal, AprobacionPerfil aprobacion_Perfil, Tramite tramite) {
+    public DesignacionTribunal(Integer id, Integer userId, Long cif,
+            String d_nota_suficiencia_tutor, String d_trabajo_grado, String d_carta_conclusion_institucion,
+            String d_solicitud_tribunal, String d_proyecto_resolucion_tribunal, String d_resolucion_tribunal,
+            String r_nota_suficiencia_tutor, String r_trabajo_grado, String r_carta_conclusion_institucion,
+            String c_solicitud_tribunal, String c_proyecto_resolucion_tribunal, String c_resolucion_tribunal,
+            AprobacionPerfil aprobacion_Perfil, Tramite tramite) {
         this.id = id;
         this.userId = userId;
-        this.cartaIdfxfda = cartaIdfxfda;
         this.cif = cif;
         this.d_nota_suficiencia_tutor = d_nota_suficiencia_tutor;
         this.d_trabajo_grado = d_trabajo_grado;
@@ -81,14 +83,6 @@ public class DesignacionTribunal {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
-    }
-
-    public Integer getCartaIdfxfda() {
-        return this.cartaIdfxfda;
-    }
-
-    public void setCartaIdfxfda(Integer cartaIdfxfda) {
-        this.cartaIdfxfda = cartaIdfxfda;
     }
 
     public Long getCif() {
@@ -212,4 +206,3 @@ public class DesignacionTribunal {
     }
 
 }
-
