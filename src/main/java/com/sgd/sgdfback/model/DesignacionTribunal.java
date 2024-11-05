@@ -33,6 +33,10 @@ public class DesignacionTribunal {
     private String c_proyecto_resolucion_tribunal;
     private String c_resolucion_tribunal;
 
+    private String f_solicitud_tribunal;
+    private String f_proyecto_resolucion_tribunal;
+    private String f_resolucion_tribunal;
+
     @ManyToOne
     @JoinColumn(name = "aprobacion_perfil_id")
     private AprobacionPerfil aprobacion_Perfil;
@@ -44,12 +48,7 @@ public class DesignacionTribunal {
     public DesignacionTribunal() {
     }
 
-    public DesignacionTribunal(Integer id, Integer userId, Long cif,
-            String d_nota_suficiencia_tutor, String d_trabajo_grado, String d_carta_conclusion_institucion,
-            String d_solicitud_tribunal, String d_proyecto_resolucion_tribunal, String d_resolucion_tribunal,
-            String r_nota_suficiencia_tutor, String r_trabajo_grado, String r_carta_conclusion_institucion,
-            String c_solicitud_tribunal, String c_proyecto_resolucion_tribunal, String c_resolucion_tribunal,
-            AprobacionPerfil aprobacion_Perfil, Tramite tramite) {
+    public DesignacionTribunal(Integer id, Integer userId, Long cif, String d_nota_suficiencia_tutor, String d_trabajo_grado, String d_carta_conclusion_institucion, String d_solicitud_tribunal, String d_proyecto_resolucion_tribunal, String d_resolucion_tribunal, String r_nota_suficiencia_tutor, String r_trabajo_grado, String r_carta_conclusion_institucion, String c_solicitud_tribunal, String c_proyecto_resolucion_tribunal, String c_resolucion_tribunal, String f_solicitud_tribunal, String f_proyecto_resolucion_tribunal, String f_resolucion_tribunal, AprobacionPerfil aprobacion_Perfil, Tramite tramite) {
         this.id = id;
         this.userId = userId;
         this.cif = cif;
@@ -65,6 +64,9 @@ public class DesignacionTribunal {
         this.c_solicitud_tribunal = c_solicitud_tribunal;
         this.c_proyecto_resolucion_tribunal = c_proyecto_resolucion_tribunal;
         this.c_resolucion_tribunal = c_resolucion_tribunal;
+        this.f_solicitud_tribunal = f_solicitud_tribunal;
+        this.f_proyecto_resolucion_tribunal = f_proyecto_resolucion_tribunal;
+        this.f_resolucion_tribunal = f_resolucion_tribunal;
         this.aprobacion_Perfil = aprobacion_Perfil;
         this.tramite = tramite;
     }
@@ -189,6 +191,30 @@ public class DesignacionTribunal {
         this.c_resolucion_tribunal = c_resolucion_tribunal;
     }
 
+    public String getF_solicitud_tribunal() {
+        return this.f_solicitud_tribunal;
+    }
+
+    public void setF_solicitud_tribunal(String f_solicitud_tribunal) {
+        this.f_solicitud_tribunal = f_solicitud_tribunal;
+    }
+
+    public String getF_proyecto_resolucion_tribunal() {
+        return this.f_proyecto_resolucion_tribunal;
+    }
+
+    public void setF_proyecto_resolucion_tribunal(String f_proyecto_resolucion_tribunal) {
+        this.f_proyecto_resolucion_tribunal = f_proyecto_resolucion_tribunal;
+    }
+
+    public String getF_resolucion_tribunal() {
+        return this.f_resolucion_tribunal;
+    }
+
+    public void setF_resolucion_tribunal(String f_resolucion_tribunal) {
+        this.f_resolucion_tribunal = f_resolucion_tribunal;
+    }
+
     public AprobacionPerfil getAprobacion_Perfil() {
         return this.aprobacion_Perfil;
     }
@@ -205,4 +231,5 @@ public class DesignacionTribunal {
         this.tramite = tramite;
     }
 
+    
 }

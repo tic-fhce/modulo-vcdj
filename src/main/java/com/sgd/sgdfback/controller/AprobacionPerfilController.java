@@ -9,9 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.sgd.sgdfback.model.AprobacionPerfil;
+import com.sgd.sgdfback.object.AprobacionPerfilCrearRequest;
 import com.sgd.sgdfback.object.ListarCYRequest;
 import com.sgd.sgdfback.service.AprobacionPerfilService;
-import org.springframework.web.bind.annotation.GetMapping;
 
 
 @RestController
@@ -54,6 +54,22 @@ public class AprobacionPerfilController {
     @PostMapping("/listar-carrera-year")
     public List<AprobacionPerfil> getListarCarreraYear(@RequestBody ListarCYRequest request) {
         return aprobacionService.obtenerAprobacionPerfilsCarreraYear(request.getCarrera(), request.getYear());
+    }
+
+    @PostMapping("/crear")
+    public ResponseEntity<AprobacionPerfil> crearAprobacionPerfilDatos(@RequestBody AprobacionPerfilCrearRequest request){
+        return new ResponseEntity<>(aprobacionService.crearAprobacionPerfilDatos(request), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/obtenerAP")
+    public ResponseEntity<AprobacionPerfil> obtenerAprobacionPerfilIdTramite(@RequestBody Map<String, String> data){
+        try {
+            String nroTramite = data.get("nrotramite");
+            Optional<AprobacionPerfil> ap = aprobacionService.obtenerAprobacionPorTramite(nroTramite);
+            return ap.map(ResponseEntity::ok).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        } catch (Exception e) {
+            throw new RuntimeException("Ocurrió un error inesperado al obtener la aprobación de perfil.", e);
+        }
     }
     
 

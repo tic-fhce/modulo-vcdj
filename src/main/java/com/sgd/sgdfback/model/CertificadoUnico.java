@@ -24,6 +24,8 @@ public class CertificadoUnico {
 
     private String c_certificado_unico;
 
+    private String f_certificado_unico;
+
     @ManyToOne
     @JoinColumn(name = "tramite_id")
     private Tramite tramite;
@@ -31,7 +33,8 @@ public class CertificadoUnico {
     public CertificadoUnico() {
     }
 
-    public CertificadoUnico(Integer id, Integer user_id, Long cif, String d_valorada, String d_cedula_identidad, String d_certificado_unico, String c_certificado_unico, Tramite tramite) {
+
+    public CertificadoUnico(Integer id, Integer user_id, Long cif, String d_valorada, String d_cedula_identidad, String d_certificado_unico, String c_certificado_unico, String f_certificado_unico, Tramite tramite) {
         this.id = id;
         this.user_id = user_id;
         this.cif = cif;
@@ -39,6 +42,7 @@ public class CertificadoUnico {
         this.d_cedula_identidad = d_cedula_identidad;
         this.d_certificado_unico = d_certificado_unico;
         this.c_certificado_unico = c_certificado_unico;
+        this.f_certificado_unico = f_certificado_unico;
         this.tramite = tramite;
     }
 
@@ -98,6 +102,14 @@ public class CertificadoUnico {
         this.c_certificado_unico = c_certificado_unico;
     }
 
+    public String getF_certificado_unico() {
+        return this.f_certificado_unico;
+    }
+
+    public void setF_certificado_unico(String f_certificado_unico) {
+        this.f_certificado_unico = f_certificado_unico;
+    }
+
     public Tramite getTramite() {
         return this.tramite;
     }
@@ -105,5 +117,5 @@ public class CertificadoUnico {
     public void setTramite(Tramite tramite) {
         this.tramite = tramite;
     }
-
+    
 }

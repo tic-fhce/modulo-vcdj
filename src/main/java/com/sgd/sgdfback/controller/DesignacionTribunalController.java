@@ -10,8 +10,10 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sgd.sgdfback.model.AprobacionPerfil;
 import com.sgd.sgdfback.model.DesignacionTribunal;
 import com.sgd.sgdfback.model.Usuario;
+import com.sgd.sgdfback.object.AprobacionPerfilCrearRequest;
 import com.sgd.sgdfback.object.ListarCYRequest;
 import com.sgd.sgdfback.service.DesignacionTribunalService;
 
@@ -75,6 +77,31 @@ public class DesignacionTribunalController {
     @PostMapping("/listar-carrera-year")
     public List<DesignacionTribunal> getListarCarreraYear(@RequestBody ListarCYRequest request) {
         return designacionService.obtenerAprobacionPerfilsCarreraYear(request.getCarrera(), request.getYear());
+    }
+
+    @PostMapping("/crear")
+    public ResponseEntity<DesignacionTribunal> crearDesignacionTribunal(@AuthenticationPrincipal Usuario user,
+            @RequestBody Map<String, String> data) {
+        String nroTramite = data.get("nrotramite");
+        return new ResponseEntity<>(designacionService.crearDesignacionTribunal(user, nroTramite), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/obtenerDT")
+    public ResponseEntity<DesignacionTribunal> obtenerDesignacionTribunalIdTramite(
+            @RequestBody Map<String, String> data) {
+        try {
+            String nroTramite = data.get("nrotramite");
+            Optional<DesignacionTribunal> dt = designacionService.obtenerDesignacionPorTramite(nroTramite);
+
+            // Si el valor existe, lo devuelve, de lo contrario, responde con OK y un cuerpo
+            // vacío
+            return dt.map(ResponseEntity::ok)
+                    .orElseGet(() -> ResponseEntity.status(HttpStatus.OK).body(null));
+
+        } catch (Exception e) {
+            // Si hay una excepción inesperada, devuelve un cuerpo vacío con un status 500
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
     }
 
     private String convertToJsonResponse(List<DesignacionTribunal> list) {

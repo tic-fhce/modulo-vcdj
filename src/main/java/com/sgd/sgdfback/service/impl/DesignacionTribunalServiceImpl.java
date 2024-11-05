@@ -1,24 +1,36 @@
 package com.sgd.sgdfback.service.impl;
 
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import com.sgd.sgdfback.dao.AprobacionPerfilDAO;
 import com.sgd.sgdfback.dao.DesignacionTribunalDAO;
+import com.sgd.sgdfback.dao.TramiteDAO;
+import com.sgd.sgdfback.model.AprobacionPerfil;
 import com.sgd.sgdfback.model.DesignacionTribunal;
+import com.sgd.sgdfback.model.Tramite;
+import com.sgd.sgdfback.model.Usuario;
+import com.sgd.sgdfback.object.AprobacionPerfilCrearRequest;
 import com.sgd.sgdfback.service.DesignacionTribunalService;
 
 import java.lang.reflect.Field;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
 public class DesignacionTribunalServiceImpl implements DesignacionTribunalService {
 
     private final DesignacionTribunalDAO designacionTribunalRepository;
+    private final TramiteDAO tramiteDAO;
+    private final AprobacionPerfilDAO aprobacionPerfilDAO;
 
-    public DesignacionTribunalServiceImpl(DesignacionTribunalDAO designacionTribunalDAO){
-        this.designacionTribunalRepository = designacionTribunalDAO;
+    public DesignacionTribunalServiceImpl(DesignacionTribunalDAO designacionTribunalRepository, TramiteDAO tramiteDAO, AprobacionPerfilDAO aprobacionPerfilDAO) {
+        this.designacionTribunalRepository = designacionTribunalRepository;
+        this.tramiteDAO = tramiteDAO;
+        this.aprobacionPerfilDAO = aprobacionPerfilDAO;
     }
-
+    
     @Override
     public void actualizarColumna(String columna, String param, String nroTramite) {
         DesignacionTribunal designacionTribunal = designacionTribunalRepository.findByTramiteId(nroTramite);
@@ -53,9 +65,44 @@ public class DesignacionTribunalServiceImpl implements DesignacionTribunalServic
     }
 
     @Override
+    public DesignacionTribunal crearDesignacionTribunal(Usuario user, String nrotramite) {
+        try {
+            String nroTramitePerfil = designacionTribunalRepository.findTramiteIdByAprobacionPerfil(user.getId(), user.getUser_roles().get(0).getUnidad().getId());
+
+            AprobacionPerfil ap = aprobacionPerfilDAO.findByAprobacionTramiteId(nroTramitePerfil).orElseThrow(() -> new RuntimeException("Aprobacion perfil no encontrado"));
+
+            Tramite t2 = tramiteDAO.findById(nrotramite).orElseThrow(() -> new RuntimeException("Trámite no encontrado"));
+            
+            DesignacionTribunal dt = new DesignacionTribunal();
+            dt.setTramite(t2);
+            dt.setAprobacion_Perfil(ap);
+            return designacionTribunalRepository.save(dt);
+        } catch (NoSuchElementException e) {
+            throw new RuntimeException("Error: Trámite no encontrado. Por favor, verifica el número del trámite.", e);
+        } catch (DataAccessException e) {
+            throw new RuntimeException("Error de acceso a datos al guardar la aprobación de perfil.", e);
+        } catch (Exception e) {
+            throw new RuntimeException("Ocurrió un error inesperado al crear la aprobación de perfil.", e);
+        }
+    }
+
+    @Override
+    public Optional<DesignacionTribunal> obtenerDesignacionPorTramite(String nroTramite) {
+        return designacionTribunalRepository.findByDesignacionTramiteId(nroTramite);
+    }
+
+    @Override
+    public List<DesignacionTribunal> obtenerAprobacionPerfilPorUsuario(Integer userId) {
+        return designacionTribunalRepository.findByUserId(userId);
+    }
+
+    @Override
     public List<DesignacionTribunal> obtenerAprobacionPerfilsCarreraYear(String carrera, Integer year){
         return designacionTribunalRepository.findByCarreraAndYear(carrera, year);
     }
+
+
+
 
     // Implementación del CRUD
     @Override
@@ -91,8 +138,5 @@ public class DesignacionTribunalServiceImpl implements DesignacionTribunalServic
         }
     }
 
-    @Override
-    public List<DesignacionTribunal> obtenerAprobacionPerfilPorUsuario(Integer userId) {
-        return designacionTribunalRepository.findByUserId(userId);
-    }
+    
 }

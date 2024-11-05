@@ -42,9 +42,14 @@ public class AprobacionPerfil {
     private String r_record_academico;
     private String r_carta_institucion;
     private String r_perfil_grado;
+
     private String c_solicitud_aprobacion_perfil;
     private String c_proyecto_resolucion_perfil;
     private String c_resolucion_perfil;
+
+    private String f_solicitud_aprobacion_perfil;
+    private String f_proyecto_resolucion_perfil;
+    private String f_resolucion_perfil;
 
     @OneToMany(mappedBy = "aprobacion_Perfil")
     @JsonIgnore
@@ -62,7 +67,8 @@ public class AprobacionPerfil {
     public AprobacionPerfil() {
     }
 
-    public AprobacionPerfil(Integer id, Integer user_id, Long cif, String modalidad, String titulo, String tutor, String d_nota_director, String d_nota_tutor, String d_conclusion_estudios, String d_record_academico, String d_carta_institucion, String d_perfil_grado, String d_solicitud_aprobacion_perfil, String d_proyecto_resolucion_perfil, String d_resolucion_perfil, String r_nota_director, String r_nota_tutor, String r_conclusion_estudios, String r_record_academico, String r_carta_institucion, String r_perfil_grado, String c_solicitud_aprobacion_perfil, String c_proyecto_resolucion_perfil, String c_resolucion_perfil, List<DesignacionTribunal> designacion_Tribunals, List<CambioModalidad> cambio_Modalidads, Tramite tramite) {
+
+    public AprobacionPerfil(Integer id, Integer user_id, Long cif, String modalidad, String titulo, String tutor, String d_nota_director, String d_nota_tutor, String d_conclusion_estudios, String d_record_academico, String d_carta_institucion, String d_perfil_grado, String d_solicitud_aprobacion_perfil, String d_proyecto_resolucion_perfil, String d_resolucion_perfil, String r_nota_director, String r_nota_tutor, String r_conclusion_estudios, String r_record_academico, String r_carta_institucion, String r_perfil_grado, String c_solicitud_aprobacion_perfil, String c_proyecto_resolucion_perfil, String c_resolucion_perfil, String f_solicitud_aprobacion_perfil, String f_proyecto_resolucion_perfil, String f_resolucion_perfil, List<DesignacionTribunal> designacion_Tribunals, List<CambioModalidad> cambio_Modalidads, Tramite tramite) {
         this.id = id;
         this.user_id = user_id;
         this.cif = cif;
@@ -87,6 +93,9 @@ public class AprobacionPerfil {
         this.c_solicitud_aprobacion_perfil = c_solicitud_aprobacion_perfil;
         this.c_proyecto_resolucion_perfil = c_proyecto_resolucion_perfil;
         this.c_resolucion_perfil = c_resolucion_perfil;
+        this.f_solicitud_aprobacion_perfil = f_solicitud_aprobacion_perfil;
+        this.f_proyecto_resolucion_perfil = f_proyecto_resolucion_perfil;
+        this.f_resolucion_perfil = f_resolucion_perfil;
         this.designacion_Tribunals = designacion_Tribunals;
         this.cambio_Modalidads = cambio_Modalidads;
         this.tramite = tramite;
@@ -284,6 +293,30 @@ public class AprobacionPerfil {
         this.c_resolucion_perfil = c_resolucion_perfil;
     }
 
+    public String getF_solicitud_aprobacion_perfil() {
+        return this.f_solicitud_aprobacion_perfil;
+    }
+
+    public void setF_solicitud_aprobacion_perfil(String f_solicitud_aprobacion_perfil) {
+        this.f_solicitud_aprobacion_perfil = f_solicitud_aprobacion_perfil;
+    }
+
+    public String getF_proyecto_resolucion_perfil() {
+        return this.f_proyecto_resolucion_perfil;
+    }
+
+    public void setF_proyecto_resolucion_perfil(String f_proyecto_resolucion_perfil) {
+        this.f_proyecto_resolucion_perfil = f_proyecto_resolucion_perfil;
+    }
+
+    public String getF_resolucion_perfil() {
+        return this.f_resolucion_perfil;
+    }
+
+    public void setF_resolucion_perfil(String f_resolucion_perfil) {
+        this.f_resolucion_perfil = f_resolucion_perfil;
+    }
+
     public List<DesignacionTribunal> getDesignacion_Tribunals() {
         return this.designacion_Tribunals;
     }
@@ -307,5 +340,5 @@ public class AprobacionPerfil {
     public void setTramite(Tramite tramite) {
         this.tramite = tramite;
     }
-
+    
 }

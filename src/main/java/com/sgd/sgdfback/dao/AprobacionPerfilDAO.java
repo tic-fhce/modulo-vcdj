@@ -1,6 +1,7 @@
 package com.sgd.sgdfback.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -10,12 +11,15 @@ import com.sgd.sgdfback.model.AprobacionPerfil;
 
 @Repository
 public interface AprobacionPerfilDAO extends JpaRepository<AprobacionPerfil, Integer> {
-    AprobacionPerfil findByTramiteId(String tramiteId);
+        AprobacionPerfil findByTramiteId(String tramiteId);
 
-    @Query("SELECT ap FROM AprobacionPerfil ap " +
-            "JOIN ap.tramite t " +
-            "WHERE t.carrera = :carrera " +
-            "AND FUNCTION('YEAR', t.creacion) = :year")
-    List<AprobacionPerfil> findByCarreraAndYear(@Param("carrera") String carrera,
-                                                @Param("year") Integer year);
+        @Query("SELECT ap FROM AprobacionPerfil ap " +
+                        "JOIN ap.tramite t " +
+                        "WHERE t.carrera = :carrera " +
+                        "AND FUNCTION('YEAR', t.creacion) = :year")
+        List<AprobacionPerfil> findByCarreraAndYear(@Param("carrera") String carrera,
+                        @Param("year") Integer year);
+
+        @Query("SELECT ap FROM AprobacionPerfil ap WHERE ap.tramite.id = :tramiteId")
+        Optional<AprobacionPerfil> findByAprobacionTramiteId(@Param("tramiteId") String tramiteId);
 }

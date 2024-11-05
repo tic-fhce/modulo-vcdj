@@ -95,7 +95,7 @@ public interface SeguimientoDAO extends JpaRepository<Seguimiento, Integer> {
                         + "WHERE ur.role.id = :rolId AND ur.unidad.id = :unidadId AND ur.user.id = :userId "
                         + "AND s.fecha_fin IS NOT NULL "
                         + "AND (f.proceso LIKE '%Fin' OR s.estado = 'fuera de plazo') "
-                        + "AND s.visto = 'false'")
+                        + "AND (s.visto = 'false' OR s.visto IS NULL)")
         Integer countTramitesConcluidos(@Param("rolId") Integer rolId,
                         @Param("unidadId") String unidadId,
                         @Param("userId") Integer userId);

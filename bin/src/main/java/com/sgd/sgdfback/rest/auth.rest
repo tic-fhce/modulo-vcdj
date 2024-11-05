@@ -1,0 +1,28 @@
+POST http://127.0.0.1:8081/api/auth/login
+Accept: application/json
+Content-Type: application/json
+
+{
+    "email": "juan@example.com",
+    "contrasenia": "123456"
+}
+
+### registro usuario
+POST http://127.0.0.1:8081/api/auth/register
+Accept: application/json
+Content-Type: application/json
+
+{
+    "usuario": "pedro",
+    "email": "pedro@mail.com",
+    "contrasenia": "123456"
+}
+
+### get perfil
+GET http://127.0.0.1:8000/api/auth/profile
+Accept: application/json
+Authorization: Authorization: Bearer 11|4ttqbzBdDktalYojG8NIx2Uu5gnyg0XjzSTZKw9x7a751c60
+### logout
+POST http://127.0.0.1:8000/api/v1/auth/logout
+Accept: application/json
+Authorization: Bearer 18|OW2Sx05DeFL0ZyjVYhmV7IK1Hx6OpY7C54O8Wu9J54bb2c02

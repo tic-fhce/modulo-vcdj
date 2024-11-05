@@ -23,7 +23,13 @@ public class CertificadoConclusion {
     private String d_certificado_unico;
     private String d_certificado_conclusion;
 
+    private String r_valorada;
+    private String r_cedula_identidad;
+    private String r_certificado_unico;
+
     private String c_certificado_conclusion;
+
+    private String f_certificado_conclusion;
 
     @ManyToOne
     @JoinColumn(name = "tramite_id")
@@ -32,7 +38,7 @@ public class CertificadoConclusion {
     public CertificadoConclusion() {
     }
 
-    public CertificadoConclusion(Integer id, Integer user_id, Long cif, String d_valorada, String d_cedula_identidad, String d_certificado_unico, String d_certificado_conclusion, String c_certificado_conclusion, Tramite tramite) {
+    public CertificadoConclusion(Integer id, Integer user_id, Long cif, String d_valorada, String d_cedula_identidad, String d_certificado_unico, String d_certificado_conclusion, String r_valorada, String r_cedula_identidad, String r_certificado_unico, String c_certificado_conclusion, String f_certificado_conclusion, Tramite tramite) {
         this.id = id;
         this.user_id = user_id;
         this.cif = cif;
@@ -40,7 +46,11 @@ public class CertificadoConclusion {
         this.d_cedula_identidad = d_cedula_identidad;
         this.d_certificado_unico = d_certificado_unico;
         this.d_certificado_conclusion = d_certificado_conclusion;
+        this.r_valorada = r_valorada;
+        this.r_cedula_identidad = r_cedula_identidad;
+        this.r_certificado_unico = r_certificado_unico;
         this.c_certificado_conclusion = c_certificado_conclusion;
+        this.f_certificado_conclusion = f_certificado_conclusion;
         this.tramite = tramite;
     }
 
@@ -100,12 +110,44 @@ public class CertificadoConclusion {
         this.d_certificado_conclusion = d_certificado_conclusion;
     }
 
+    public String getR_valorada() {
+        return this.r_valorada;
+    }
+
+    public void setR_valorada(String r_valorada) {
+        this.r_valorada = r_valorada;
+    }
+
+    public String getR_cedula_identidad() {
+        return this.r_cedula_identidad;
+    }
+
+    public void setR_cedula_identidad(String r_cedula_identidad) {
+        this.r_cedula_identidad = r_cedula_identidad;
+    }
+
+    public String getR_certificado_unico() {
+        return this.r_certificado_unico;
+    }
+
+    public void setR_certificado_unico(String r_certificado_unico) {
+        this.r_certificado_unico = r_certificado_unico;
+    }
+
     public String getC_certificado_conclusion() {
         return this.c_certificado_conclusion;
     }
 
     public void setC_certificado_conclusion(String c_certificado_conclusion) {
         this.c_certificado_conclusion = c_certificado_conclusion;
+    }
+
+    public String getF_certificado_conclusion() {
+        return this.f_certificado_conclusion;
+    }
+
+    public void setF_certificado_conclusion(String f_certificado_conclusion) {
+        this.f_certificado_conclusion = f_certificado_conclusion;
     }
 
     public Tramite getTramite() {
@@ -115,6 +157,7 @@ public class CertificadoConclusion {
     public void setTramite(Tramite tramite) {
         this.tramite = tramite;
     }
+
 
 }
 

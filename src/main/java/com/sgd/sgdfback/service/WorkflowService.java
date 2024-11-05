@@ -128,30 +128,35 @@ public class WorkflowService {
             UsuarioRol ur = null;
             try {
                 if (SigRolId.equals(1) || SigRolId.equals(2) || SigRolId.equals(13) || SigRolId.equals(14)) {
-                    ur = usuarioRolDAO.findRolUnidad(SigRolId, "FHCE").orElseThrow(() -> new RuntimeException("Usuario con rol y unidad no encontrado en FHCE"));
+                    ur = usuarioRolDAO.findRolUnidad(SigRolId, "FHCE").orElseThrow(() -> new RuntimeException("XX Usuario con rol y unidad no encontrado en FHCE"));
                 } else if (SigRolId.equals(6) || SigRolId.equals(7)) {
-                    ur = usuarioRolDAO.findUsuarioRolUnidad(SigRolId, unidadId, t1.getUser_id()).orElseThrow(() -> new RuntimeException("Usuario con rol y unidad específicos no encontrado"));
+                    ur = usuarioRolDAO.findUsuarioRolUnidad(SigRolId, unidadId, t1.getUser_id()).orElseThrow(() -> new RuntimeException("YY Usuario con rol y unidad específicos no encontrado"));
                 } else {
-                    ur = usuarioRolDAO.findRolUnidad(SigRolId, unidadId).orElseThrow(() -> new RuntimeException("Usuario con rol y unidad específicos no encontrado"));
+                    String uId = t1.getCarrera();
+                    ur = usuarioRolDAO.findRolUnidad(SigRolId, uId).orElseThrow(() -> new RuntimeException("ZZ Usuario con rol y unidad específicos no encontrado"));
                 }
             } catch (Exception e) {
                 throw new RuntimeException("Error al asignar UsuarioRol: " + e.getMessage());
             }
 
+            Seguimiento seg = new Seguimiento();
+
             LocalDateTime fechaFin = null;
             if (procesoSiguiente.endsWith("Fin")) {
                 fechaFin = LocalDateTime.now();
                 t1.setEstado("terminado");
+                seg.setEstado("terminado");
+            } else {
+                seg.setEstado("pendiente");
             }
             tramiteDAO.save(t1);
 
-            Seguimiento seg = new Seguimiento();
+            
             seg.setTramite(t1);
             seg.setFlujo(f2);
             seg.setUsuarioRol(ur);
             seg.setFecha_fin(fechaFin);
             seg.setFecha_inicio(LocalDateTime.now());
-            seg.setEstado("pendiente");
             seg.setTiempo(fechaHoraFutura);
             seg.setComentario(comentario);
             seguimientoDAO.save(seg);

@@ -29,6 +29,8 @@ public class Convalidacion01 {
 
     private String c_informe_convalidacion;
 
+    private String f_informe_convalidacion;
+
     @ManyToOne
     @JoinColumn(name = "tramite_id")
     private Tramite tramite;
@@ -37,7 +39,7 @@ public class Convalidacion01 {
     public Convalidacion01() {
     }
 
-    public Convalidacion01(Integer id, Integer user_id, Long cif, String d_nota_director, String d_cedula_identidad, String d_record_academico, String d_informe_convalidacion, String r_nota_director, String r_cedula_identidad, String r_record_academico, String r_informe_convalidacion, String c_informe_convalidacion, Tramite tramite) {
+    public Convalidacion01(Integer id, Integer user_id, Long cif, String d_nota_director, String d_cedula_identidad, String d_record_academico, String d_informe_convalidacion, String r_nota_director, String r_cedula_identidad, String r_record_academico, String r_informe_convalidacion, String c_informe_convalidacion, String f_informe_convalidacion, Tramite tramite) {
         this.id = id;
         this.user_id = user_id;
         this.cif = cif;
@@ -50,6 +52,7 @@ public class Convalidacion01 {
         this.r_record_academico = r_record_academico;
         this.r_informe_convalidacion = r_informe_convalidacion;
         this.c_informe_convalidacion = c_informe_convalidacion;
+        this.f_informe_convalidacion = f_informe_convalidacion;
         this.tramite = tramite;
     }
 
@@ -149,6 +152,14 @@ public class Convalidacion01 {
         this.c_informe_convalidacion = c_informe_convalidacion;
     }
 
+    public String getF_informe_convalidacion() {
+        return this.f_informe_convalidacion;
+    }
+
+    public void setF_informe_convalidacion(String f_informe_convalidacion) {
+        this.f_informe_convalidacion = f_informe_convalidacion;
+    }
+
     public Tramite getTramite() {
         return this.tramite;
     }
@@ -156,5 +167,7 @@ public class Convalidacion01 {
     public void setTramite(Tramite tramite) {
         this.tramite = tramite;
     }
+
+    
 
 }

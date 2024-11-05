@@ -26,6 +26,8 @@ public class MateriaExtra {
     private String r_respaldo;
 
     private String c_aval;
+
+    private String f_aval;
     
 
     @ManyToOne
@@ -35,7 +37,7 @@ public class MateriaExtra {
     public MateriaExtra() {
     }
 
-    public MateriaExtra(Integer id, Integer user_id, Long cif, String d_solicitud, String d_respaldo, String d_aval, String r_solicitud, String r_respaldo, String c_aval, Tramite tramite) {
+    public MateriaExtra(Integer id, Integer user_id, Long cif, String d_solicitud, String d_respaldo, String d_aval, String r_solicitud, String r_respaldo, String c_aval, String f_aval, Tramite tramite) {
         this.id = id;
         this.user_id = user_id;
         this.cif = cif;
@@ -45,6 +47,7 @@ public class MateriaExtra {
         this.r_solicitud = r_solicitud;
         this.r_respaldo = r_respaldo;
         this.c_aval = c_aval;
+        this.f_aval = f_aval;
         this.tramite = tramite;
     }
 
@@ -118,6 +121,14 @@ public class MateriaExtra {
 
     public void setC_aval(String c_aval) {
         this.c_aval = c_aval;
+    }
+
+    public String getF_aval() {
+        return this.f_aval;
+    }
+
+    public void setF_aval(String f_aval) {
+        this.f_aval = f_aval;
     }
 
     public Tramite getTramite() {

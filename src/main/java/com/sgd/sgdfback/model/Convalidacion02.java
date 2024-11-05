@@ -39,6 +39,10 @@ public class Convalidacion02 {
     private String c_proy_resolucion;
     private String c_resolucion;
 
+    private String f_informe_convalidacion;
+    private String f_proy_resolucion;
+    private String f_resolucion;
+
     @ManyToOne
     @JoinColumn(name = "tramite_id")
     private Tramite tramite;
@@ -47,7 +51,7 @@ public class Convalidacion02 {
     public Convalidacion02() {
     }
 
-    public Convalidacion02(Integer id, Integer user_id, Long cif, String d_nota_director, String d_cedula_identidad, String d_record_academico_carrera_origen, String d_contenidos_analiticos, String d_formulario_convalidacion, String d_informe_convalidacion, String d_proy_resolucion, String d_resolucion, String r_nota_director, String r_cedula_identidad, String r_record_academico_carrera_origen, String r_contenidos_analiticos, String r_formulario_convalidacion, String r_informe_convalidacion, String r_proy_resolucion, String c_informe_convalidacion, String c_proy_resolucion, String c_resolucion, Tramite tramite) {
+    public Convalidacion02(Integer id, Integer user_id, Long cif, String d_nota_director, String d_cedula_identidad, String d_record_academico_carrera_origen, String d_contenidos_analiticos, String d_formulario_convalidacion, String d_informe_convalidacion, String d_proy_resolucion, String d_resolucion, String r_nota_director, String r_cedula_identidad, String r_record_academico_carrera_origen, String r_contenidos_analiticos, String r_formulario_convalidacion, String r_informe_convalidacion, String r_proy_resolucion, String c_informe_convalidacion, String c_proy_resolucion, String c_resolucion, String f_informe_convalidacion, String f_proy_resolucion, String f_resolucion, Tramite tramite) {
         this.id = id;
         this.user_id = user_id;
         this.cif = cif;
@@ -69,6 +73,9 @@ public class Convalidacion02 {
         this.c_informe_convalidacion = c_informe_convalidacion;
         this.c_proy_resolucion = c_proy_resolucion;
         this.c_resolucion = c_resolucion;
+        this.f_informe_convalidacion = f_informe_convalidacion;
+        this.f_proy_resolucion = f_proy_resolucion;
+        this.f_resolucion = f_resolucion;
         this.tramite = tramite;
     }
 
@@ -238,6 +245,30 @@ public class Convalidacion02 {
 
     public void setC_resolucion(String c_resolucion) {
         this.c_resolucion = c_resolucion;
+    }
+
+    public String getF_informe_convalidacion() {
+        return this.f_informe_convalidacion;
+    }
+
+    public void setF_informe_convalidacion(String f_informe_convalidacion) {
+        this.f_informe_convalidacion = f_informe_convalidacion;
+    }
+
+    public String getF_proy_resolucion() {
+        return this.f_proy_resolucion;
+    }
+
+    public void setF_proy_resolucion(String f_proy_resolucion) {
+        this.f_proy_resolucion = f_proy_resolucion;
+    }
+
+    public String getF_resolucion() {
+        return this.f_resolucion;
+    }
+
+    public void setF_resolucion(String f_resolucion) {
+        this.f_resolucion = f_resolucion;
     }
 
     public Tramite getTramite() {

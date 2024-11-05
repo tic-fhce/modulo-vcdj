@@ -1,13 +1,18 @@
 package com.sgd.sgdfback.service.impl;
 
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.sgd.sgdfback.dao.AprobacionPerfilDAO;
+import com.sgd.sgdfback.dao.TramiteDAO;
 import com.sgd.sgdfback.model.AprobacionPerfil;
+import com.sgd.sgdfback.model.Tramite;
+import com.sgd.sgdfback.object.AprobacionPerfilCrearRequest;
 import com.sgd.sgdfback.service.AprobacionPerfilService;
 
 import java.lang.reflect.Field;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -16,9 +21,11 @@ import javax.transaction.Transactional;
 public class AprobacionPerfilServiceImpl implements AprobacionPerfilService {
 
     private final AprobacionPerfilDAO aprobacionPerfilRepository;
+    private final TramiteDAO tramiteDAO;
 
-    public AprobacionPerfilServiceImpl(AprobacionPerfilDAO aprobacionPerfilDAO){
-        this.aprobacionPerfilRepository = aprobacionPerfilDAO;
+    public AprobacionPerfilServiceImpl(AprobacionPerfilDAO aprobacionPerfilRepository, TramiteDAO tramiteDAO) {
+        this.aprobacionPerfilRepository = aprobacionPerfilRepository;
+        this.tramiteDAO = tramiteDAO;
     }
 
     @Override
@@ -55,13 +62,34 @@ public class AprobacionPerfilServiceImpl implements AprobacionPerfilService {
     }
 
     @Override
-    public List<AprobacionPerfil> obtenerAprobacionPerfilsCarreraYear(String carrera, Integer year){
+    public List<AprobacionPerfil> obtenerAprobacionPerfilsCarreraYear(String carrera, Integer year) {
         return aprobacionPerfilRepository.findByCarreraAndYear(carrera, year);
     }
 
+    @Override
+    public AprobacionPerfil crearAprobacionPerfilDatos(AprobacionPerfilCrearRequest request) {
+        try {
+            Tramite t = tramiteDAO.findById(request.getNrotramite()).orElseThrow(() -> new RuntimeException("Trámite no encontrado"));
+            AprobacionPerfil ap = new AprobacionPerfil();
+            ap.setModalidad(request.getModalidad());
+            ap.setTitulo(request.getTitulo());
+            ap.setTutor(request.getTutor());
+            ap.setTramite(t);
+            return aprobacionPerfilRepository.save(ap);
+        } catch (NoSuchElementException e) {
+            throw new RuntimeException("Error: Trámite no encontrado. Por favor, verifica el número del trámite.", e);
+        } catch (DataAccessException e) {
+            throw new RuntimeException("Error de acceso a datos al guardar la aprobación de perfil.", e);
+        } catch (Exception e) {
+            throw new RuntimeException("Ocurrió un error inesperado al crear la aprobación de perfil.", e);
+        }
+    }
 
-
-
+    @Override
+    public Optional<AprobacionPerfil> obtenerAprobacionPorTramite(String nroTramite) {
+        return aprobacionPerfilRepository.findByAprobacionTramiteId(nroTramite);
+    }
+    
 
     // Implementación del CRUD
     @Override
