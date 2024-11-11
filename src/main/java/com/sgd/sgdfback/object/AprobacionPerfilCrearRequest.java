@@ -2,6 +2,7 @@ package com.sgd.sgdfback.object;
 
 public class AprobacionPerfilCrearRequest {
     private String nrotramite;
+    private String cambio_resolucion;
     private String modalidad;
     private String titulo;
     private String tutor;
@@ -10,8 +11,9 @@ public class AprobacionPerfilCrearRequest {
     public AprobacionPerfilCrearRequest() {
     }
 
-    public AprobacionPerfilCrearRequest(String nrotramite, String modalidad, String titulo, String tutor) {
+    public AprobacionPerfilCrearRequest(String nrotramite, String cambio_resolucion, String modalidad, String titulo, String tutor) {
         this.nrotramite = nrotramite;
+        this.cambio_resolucion = cambio_resolucion;
         this.modalidad = modalidad;
         this.titulo = titulo;
         this.tutor = tutor;
@@ -23,6 +25,14 @@ public class AprobacionPerfilCrearRequest {
 
     public void setNrotramite(String nrotramite) {
         this.nrotramite = nrotramite;
+    }
+
+    public String getCambio_resolucion() {
+        return this.cambio_resolucion;
+    }
+
+    public void setCambio_resolucion(String cambio_resolucion) {
+        this.cambio_resolucion = cambio_resolucion;
     }
 
     public String getModalidad() {
@@ -48,5 +58,5 @@ public class AprobacionPerfilCrearRequest {
     public void setTutor(String tutor) {
         this.tutor = tutor;
     }
-
+    
 }

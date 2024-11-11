@@ -127,7 +127,7 @@ public class WorkflowService {
 
             UsuarioRol ur = null;
             try {
-                if (SigRolId.equals(1) || SigRolId.equals(2) || SigRolId.equals(13) || SigRolId.equals(14)) {
+                if (SigRolId.equals(1) || SigRolId.equals(2) || SigRolId.equals(13) || SigRolId.equals(14) || SigRolId.equals(15)) {
                     ur = usuarioRolDAO.findRolUnidad(SigRolId, "FHCE").orElseThrow(() -> new RuntimeException("XX Usuario con rol y unidad no encontrado en FHCE"));
                 } else if (SigRolId.equals(6) || SigRolId.equals(7)) {
                     ur = usuarioRolDAO.findUsuarioRolUnidad(SigRolId, unidadId, t1.getUser_id()).orElseThrow(() -> new RuntimeException("YY Usuario con rol y unidad específicos no encontrado"));

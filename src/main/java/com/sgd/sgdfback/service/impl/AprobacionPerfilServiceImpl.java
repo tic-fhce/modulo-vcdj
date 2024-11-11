@@ -71,6 +71,7 @@ public class AprobacionPerfilServiceImpl implements AprobacionPerfilService {
         try {
             Tramite t = tramiteDAO.findById(request.getNrotramite()).orElseThrow(() -> new RuntimeException("Trámite no encontrado"));
             AprobacionPerfil ap = new AprobacionPerfil();
+            ap.setCambio_resolucion(request.getCambio_resolucion());
             ap.setModalidad(request.getModalidad());
             ap.setTitulo(request.getTitulo());
             ap.setTutor(request.getTutor());
@@ -88,6 +89,11 @@ public class AprobacionPerfilServiceImpl implements AprobacionPerfilService {
     @Override
     public Optional<AprobacionPerfil> obtenerAprobacionPorTramite(String nroTramite) {
         return aprobacionPerfilRepository.findByAprobacionTramiteId(nroTramite);
+    }
+
+    @Override
+    public Optional<AprobacionPerfil> obtenerUltimaAprobacionPerfil(Integer userId){
+        return aprobacionPerfilRepository.findByUltimaAprobacionPerfil(userId);
     }
     
 

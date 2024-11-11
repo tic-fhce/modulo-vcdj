@@ -23,12 +23,17 @@ public interface DesignacionTribunalDAO extends JpaRepository<DesignacionTribuna
         List<DesignacionTribunal> findByCarreraAndYear(@Param("carrera") String carrera,
                         @Param("year") Integer year);
 
-
         @Query("SELECT dt FROM DesignacionTribunal dt WHERE dt.tramite.id = :tramiteId")
         Optional<DesignacionTribunal> findByDesignacionTramiteId(@Param("tramiteId") String tramiteId);
 
+        // @Query(value = "SELECT t.id FROM tramite t WHERE t.flujo = 'F19' AND
+        // t.user_id = :userId AND t.carrera = :carrera", nativeQuery = true)
+        // String findTramiteIdByAprobacionPerfil(@Param("userId") Integer userId,
+        // @Param("carrera") String carrera);
 
-        @Query(value = "SELECT t.id FROM tramite t WHERE t.flujo = 'F19' AND t.user_id = :userId AND t.carrera = :carrera", nativeQuery = true)
+        @Query(value = "SELECT t.id FROM tramite t " +
+                        "WHERE (t.flujo = 'F19' OR t.flujo = 'F21') AND t.user_id = :userId AND t.carrera = :carrera " +
+                        "ORDER BY t.creacion DESC LIMIT 1", nativeQuery = true)
         String findTramiteIdByAprobacionPerfil(@Param("userId") Integer userId,
                         @Param("carrera") String carrera);
 

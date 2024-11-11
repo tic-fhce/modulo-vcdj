@@ -10,10 +10,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sgd.sgdfback.model.AprobacionPerfil;
 import com.sgd.sgdfback.model.DesignacionTribunal;
 import com.sgd.sgdfback.model.Usuario;
-import com.sgd.sgdfback.object.AprobacionPerfilCrearRequest;
 import com.sgd.sgdfback.object.ListarCYRequest;
 import com.sgd.sgdfback.service.DesignacionTribunalService;
 

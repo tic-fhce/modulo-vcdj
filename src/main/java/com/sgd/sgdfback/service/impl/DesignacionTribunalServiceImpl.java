@@ -10,7 +10,6 @@ import com.sgd.sgdfback.model.AprobacionPerfil;
 import com.sgd.sgdfback.model.DesignacionTribunal;
 import com.sgd.sgdfback.model.Tramite;
 import com.sgd.sgdfback.model.Usuario;
-import com.sgd.sgdfback.object.AprobacionPerfilCrearRequest;
 import com.sgd.sgdfback.service.DesignacionTribunalService;
 
 import java.lang.reflect.Field;
@@ -68,7 +67,7 @@ public class DesignacionTribunalServiceImpl implements DesignacionTribunalServic
     public DesignacionTribunal crearDesignacionTribunal(Usuario user, String nrotramite) {
         try {
             String nroTramitePerfil = designacionTribunalRepository.findTramiteIdByAprobacionPerfil(user.getId(), user.getUser_roles().get(0).getUnidad().getId());
-
+            System.out.println(nroTramitePerfil);
             AprobacionPerfil ap = aprobacionPerfilDAO.findByAprobacionTramiteId(nroTramitePerfil).orElseThrow(() -> new RuntimeException("Aprobacion perfil no encontrado"));
 
             Tramite t2 = tramiteDAO.findById(nrotramite).orElseThrow(() -> new RuntimeException("Trámite no encontrado"));

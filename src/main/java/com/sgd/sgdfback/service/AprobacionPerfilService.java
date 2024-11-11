@@ -13,6 +13,7 @@ public interface AprobacionPerfilService {
     List<AprobacionPerfil> obtenerAprobacionPerfilsCarreraYear(String carrera, Integer year);
     AprobacionPerfil crearAprobacionPerfilDatos(AprobacionPerfilCrearRequest request);
     Optional<AprobacionPerfil> obtenerAprobacionPorTramite(String nroTramite);
+    Optional<AprobacionPerfil> obtenerUltimaAprobacionPerfil(Integer userId);
 
     // Métodos CRUD
     AprobacionPerfil crearAprobacionPerfil(AprobacionPerfil aprobacionPerfil);

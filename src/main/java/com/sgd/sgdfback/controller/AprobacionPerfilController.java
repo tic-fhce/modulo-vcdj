@@ -6,12 +6,15 @@ import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import com.sgd.sgdfback.model.AprobacionPerfil;
+import com.sgd.sgdfback.model.Usuario;
 import com.sgd.sgdfback.object.AprobacionPerfilCrearRequest;
 import com.sgd.sgdfback.object.ListarCYRequest;
 import com.sgd.sgdfback.service.AprobacionPerfilService;
+
 
 
 @RestController
@@ -61,12 +64,19 @@ public class AprobacionPerfilController {
         return new ResponseEntity<>(aprobacionService.crearAprobacionPerfilDatos(request), HttpStatus.CREATED);
     }
 
+    @PostMapping("/obtenerUAP")
+    public ResponseEntity<AprobacionPerfil> postMethodName(@AuthenticationPrincipal Usuario user) {
+        Optional<AprobacionPerfil> ap = aprobacionService.obtenerUltimaAprobacionPerfil(user.getId());
+        return ap.map(ResponseEntity::ok).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+    
+
     @PostMapping("/obtenerAP")
     public ResponseEntity<AprobacionPerfil> obtenerAprobacionPerfilIdTramite(@RequestBody Map<String, String> data){
         try {
             String nroTramite = data.get("nrotramite");
             Optional<AprobacionPerfil> ap = aprobacionService.obtenerAprobacionPorTramite(nroTramite);
-            return ap.map(ResponseEntity::ok).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+            return ap.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.OK).body(null));
         } catch (Exception e) {
             throw new RuntimeException("Ocurrió un error inesperado al obtener la aprobación de perfil.", e);
         }

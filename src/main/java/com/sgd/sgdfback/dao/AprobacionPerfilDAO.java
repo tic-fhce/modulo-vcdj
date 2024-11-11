@@ -22,4 +22,20 @@ public interface AprobacionPerfilDAO extends JpaRepository<AprobacionPerfil, Int
 
         @Query("SELECT ap FROM AprobacionPerfil ap WHERE ap.tramite.id = :tramiteId")
         Optional<AprobacionPerfil> findByAprobacionTramiteId(@Param("tramiteId") String tramiteId);
+
+        /*
+         * @Query("SELECT ap FROM AprobacionPerfil ap " +
+         * "JOIN ap.tramite t " +
+         * "WHERE t.user_id = :userId " +
+         * "ORDER BY t.creacion DESC")
+         * Optional<AprobacionPerfil> findByUltimaAprobacionPerfil(@Param("userId")
+         * Integer userId);
+         */
+
+        @Query(value = "SELECT ap.* FROM aprobacion_perfil ap " +
+                        "JOIN tramite t ON ap.tramite_id = t.id " +
+                        "WHERE t.user_id = :userId " +
+                        "ORDER BY t.creacion DESC LIMIT 1", nativeQuery = true)
+        Optional<AprobacionPerfil> findByUltimaAprobacionPerfil(@Param("userId") Integer userId);
+
 }
