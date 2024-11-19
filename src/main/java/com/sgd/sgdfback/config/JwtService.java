@@ -28,24 +28,24 @@ public class JwtService {
         return getToken(new HashMap<>(), user);
     }
 
-    private String getToken(Map<String,Object> extraClaims, Usuario user) {
+    private String getToken(Map<String, Object> extraClaims, Usuario user) {
         return Jwts
-            .builder()
-            .header()  // Obtener el objeto BuilderHeader para configurar el encabezado
-            .type("JWT")  // Configurar el tipo de token en el encabezado
-            .and()
-            .claims(extraClaims)
-            .claim("userID", user.getId())
-            .subject(user.getUsername())
-            .issuedAt(new Date(System.currentTimeMillis()))
-            .expiration(new Date(System.currentTimeMillis()+14400000))
-            .signWith(getKey())
-            .compact();
+                .builder()
+                .header() // Obtener el objeto BuilderHeader para configurar el encabezado
+                .type("JWT") // Configurar el tipo de token en el encabezado
+                .and()
+                .claims(extraClaims)
+                .claim("userID", user.getId())
+                .subject(user.getUsername())
+                .issuedAt(new Date(System.currentTimeMillis()))
+                .expiration(new Date(System.currentTimeMillis() + 14400000))
+                .signWith(getKey())
+                .compact();
     }
 
     private SecretKey getKey() {
-       byte[] keyBytes=Decoders.BASE64.decode(SECRET_KEY);
-       return Keys.hmacShaKeyFor(keyBytes);
+        byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
+        return Keys.hmacShaKeyFor(keyBytes);
     }
 
     public String getUsernameFromToken(String token) {
@@ -53,34 +53,30 @@ public class JwtService {
     }
 
     public boolean isTokenValid(String token, UserDetails userDetails) {
-        final String username=getUsernameFromToken(token);
-        return (username.equals(userDetails.getUsername())&& !isTokenExpired(token));
+        final String username = getUsernameFromToken(token);
+        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
 
-    private Claims getAllClaims(String token)
-    {
+    private Claims getAllClaims(String token) {
         return Jwts
-            .parser()
-            .verifyWith(getKey())
-            .build()
-            .parseSignedClaims(token)
-            .getPayload();
+                .parser()
+                .verifyWith(getKey())
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
     }
 
-    public <T> T getClaim(String token, Function<Claims,T> claimsResolver)
-    {
-        final Claims claims=getAllClaims(token);
+    public <T> T getClaim(String token, Function<Claims, T> claimsResolver) {
+        final Claims claims = getAllClaims(token);
         return claimsResolver.apply(claims);
     }
 
-    private Date getExpiration(String token)
-    {
+    private Date getExpiration(String token) {
         return getClaim(token, Claims::getExpiration);
     }
 
-    private boolean isTokenExpired(String token)
-    {
+    private boolean isTokenExpired(String token) {
         return getExpiration(token).before(new Date());
     }
-    
+
 }

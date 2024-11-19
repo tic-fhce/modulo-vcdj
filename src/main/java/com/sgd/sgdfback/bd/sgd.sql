@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-11-2024 a las 05:15:29
+-- Tiempo de generación: 19-11-2024 a las 20:00:17
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.0.28
 
@@ -668,13 +668,13 @@ CREATE TABLE `seguimiento` (
 
 CREATE TABLE `tramite` (
   `id` varchar(255) NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
+  `carrera` varchar(255) DEFAULT NULL,
+  `creacion` datetime(6) DEFAULT NULL,
+  `estado` varchar(50) DEFAULT 'pendiente',
   `flujo` varchar(255) DEFAULT NULL,
   `proceso` varchar(255) DEFAULT NULL,
   `tipo` varchar(255) DEFAULT NULL,
-  `carrera` varchar(255) DEFAULT NULL,
-  `estado` varchar(50) DEFAULT 'pendiente',
-  `creacion` datetime(6) DEFAULT NULL
+  `user_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -972,7 +972,7 @@ ALTER TABLE `alumno_libre`
 -- AUTO_INCREMENT de la tabla `aprobacion_perfil`
 --
 ALTER TABLE `aprobacion_perfil`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16228;
 
 --
 -- AUTO_INCREMENT de la tabla `certificado_conclusion`
