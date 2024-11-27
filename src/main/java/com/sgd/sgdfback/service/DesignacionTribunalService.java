@@ -1,6 +1,5 @@
 package com.sgd.sgdfback.service;
 
-import com.sgd.sgdfback.model.AprobacionPerfil;
 import com.sgd.sgdfback.model.DesignacionTribunal;
 import com.sgd.sgdfback.model.Usuario;
 

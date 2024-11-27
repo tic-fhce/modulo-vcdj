@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-11-2024 a las 20:00:17
+-- Tiempo de generación: 19-11-2024 a las 21:17:36
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.0.28
 
@@ -759,7 +759,28 @@ INSERT INTO `user` (`id`, `password`, `username`, `cif`) VALUES
 (26, '$2a$10$kz5Ed/EgLi0V7c1bXfolgeLq5eH8oYx5AQMQYK.8wBMTir15bgvc6', 'personaldocente', '22409200801'),
 (27, '$2a$10$X0/T2BUVKhFehIlIim2rNOrO1vs0W4x3npyVF4vi4aWzzYDCQwSsq', 'bienestarsocial', '22409200802'),
 (28, '$2a$10$aZKbCyDy6Kp1xXlotnLa.eswdJaPXNJyHX2Rq4YgiYKWGNk7cUK5.', 'comisiondocente', '22409200803'),
-(29, '$2a$10$zvb.7T8UVWnMFqH75kCe.eJA2Om2D.XJiqY.5Pz3V4fTKy.sD6w7a', 'comisionestudiante', '22409200804');
+(29, '$2a$10$zvb.7T8UVWnMFqH75kCe.eJA2Om2D.XJiqY.5Pz3V4fTKy.sD6w7a', 'comisionestudiante', '22409200804'),
+(30, '$2a$10$NvwgcvJckzDqUwXl0UMnVeNKhYgG.QGgnKushgh4AjL7ckzR2IZBi', 'estudiante3', '22409200805'),
+(31, '$2a$10$Rd1.M1.F2h7aNKbFJRnsaudDmzzlzXt7VHyMClzUsRKSAHebUt1LG', 'estudiante4', '22409200806'),
+(32, '$2a$10$5tZLA2UuqV9.DF/CFSzjLe5xGW7A67nLXtL9L4114rhJOAPP1sFnO', 'estudiante5', '22409200807'),
+(33, '$2a$10$Zzxg6STDmSo9EI3/k3k1Qu3YiNilep6XEavUIsFATL1C6b29b9FMe', 'estudiante6', '22409200808'),
+(34, '$2a$10$FqiPQoKax7MOrpKpJmtbQ.kwt.24HHMSm8PubAY3d1CgZlliHn3Ta', 'estudiante7', '22409200809'),
+(35, '$2a$10$T88LIRqw6sHIpWzsFcFGzuQmpOIGnpE2Y.jaIHR6G5u7xa.NIlJga', 'estudiante8', '22409200810'),
+(36, '$2a$10$uU9W9vdjJ8rBF9RdMc/xge1o7Cy1FEGsmEg1n68yvlg0EgzqvCU2u', 'estudiante9', '22409200811'),
+(37, '$2a$10$hM0GyaGYcl1AgzKQVs6UOOdZ8cFif8mwu9X6edf5ev.qYlK7R5cGO', 'estudiante10', '22409200812'),
+(38, '$2a$10$RnJR3yZr1KLMKqzfqGxwveWl0SRQwuzXhCamBxdPhxtz7O6Jjcsre', 'estudiante11', '22409200813'),
+(39, '$2a$10$bUcniZ5M45v5.TPF27t8AOWDNA7bIhFwKuOtiugvmKM65X5tMGucO', 'estudiante12', '22409200814'),
+(40, '$2a$10$bfFVPZU.y4DpLHM/bIP0quNKWc9AzyLCPyiD7T57otmKCVblUUL/G', 'estudiante13', '22409200815'),
+(41, '$2a$10$.5LuTyOkLDGQ3P0RCplXD.UrrnefJI0J7IpqT12FlfV2E4oM1do26', 'estudiante14', '22409200816'),
+(42, '$2a$10$2bLAYVGELgFxkl/mA7grl.oNXKoOj5.JTWwiDlTHrNRrHRDXJ.gii', 'estudiante15', '22409200817'),
+(43, '$2a$10$U.uzEK5vG4SxPyj.lFlSHOtvdJyoizjQSrKaX5FM882W3nvH8w6Mu', 'estudiante16', '22409200818'),
+(44, '$2a$10$Y98ENbhzB5cQBJKag6jk8eboDQxNW1ncjL9zOqcLg7SJRzySp/ipi', 'estudiante17', '22409200819'),
+(45, '$2a$10$gG761hlveC4fWiQnxJ9sGer7YZIuss.NBsU2xVQcl1NYXV0q7F6.6', 'estudiante18', '22409200820'),
+(46, '$2a$10$7dbSgyz5wiDXO5N5vWxmRepaNfu2RsTfwCw7jrkEYB08SGGpT1izq', 'estudiante19', '22409200821'),
+(47, '$2a$10$yU6N8TPL/1KHsrHaPZUIwOX7Zg8PHL3L06Rfa7CVZpQi56n4ckOhe', 'estudiante20', '22409200822'),
+(48, '$2a$10$Jz.3xH/wD78VXP5w2lBs.e61SiHzJv7fyI4pgQGkRwbjhuqj6dS9S', 'estudiante21', '22409200823'),
+(49, '$2a$10$1neTf4hjvdNpAToQX.vXXep6z4ENCPqSW3K5Zn2chpqa0wypjpnEW', 'estudiante22', '22409200824'),
+(50, '$2a$10$qDDJHYRMJ8Rcxm/6/zSsEe0fnAi7/liAfvGbdsGcBre2YgRVx2l4S', 'estudiante23', '22409200825');
 
 -- --------------------------------------------------------
 
@@ -781,22 +802,43 @@ CREATE TABLE `user_role` (
 INSERT INTO `user_role` (`id`, `role_id`, `user_id`, `unidad_id`) VALUES
 (1, 1, 1, 'FHCE'),
 (2, 2, 2, 'FHCE'),
-(3, 3, 3, 'PSI'),
-(4, 4, 4, 'PSI'),
-(6, 7, 7, 'PSI'),
-(7, 7, 8, 'PSI'),
-(8, 5, 5, 'PSI'),
-(9, 10, 13, 'PSI'),
-(10, 11, 14, 'PSI'),
+(3, 3, 3, 'CI'),
+(4, 4, 4, 'CI'),
+(6, 7, 7, 'CI'),
+(7, 7, 8, 'CI'),
+(8, 5, 5, 'CI'),
+(9, 10, 13, 'CI'),
+(10, 11, 14, 'CI'),
 (11, 4, 15, 'HIS'),
 (12, 12, 16, 'FHCE'),
 (13, 13, 17, 'FHCE'),
 (16, 7, 23, 'HIS'),
-(18, 6, 25, 'PSI'),
+(18, 6, 25, 'CI'),
 (19, 14, 26, 'FHCE'),
 (20, 15, 27, 'FHCE'),
-(21, 16, 28, 'PSI'),
-(22, 17, 29, 'PSI');
+(21, 16, 28, 'CI'),
+(22, 17, 29, 'CI'),
+(23, 7, 30, 'CI'),
+(24, 7, 31, 'CI'),
+(25, 7, 32, 'CI'),
+(26, 7, 33, 'CI'),
+(27, 7, 34, 'CI'),
+(28, 7, 35, 'CI'),
+(29, 7, 36, 'CI'),
+(30, 7, 37, 'CI'),
+(31, 7, 38, 'CI'),
+(32, 7, 39, 'CI'),
+(33, 7, 40, 'CI'),
+(34, 7, 41, 'CI'),
+(35, 7, 42, 'CI'),
+(36, 7, 43, 'CI'),
+(37, 7, 44, 'CI'),
+(38, 7, 45, 'CI'),
+(39, 7, 46, 'CI'),
+(40, 7, 47, 'CI'),
+(41, 7, 48, 'CI'),
+(42, 7, 49, 'CI'),
+(43, 7, 50, 'CI');
 
 --
 -- Índices para tablas volcadas
@@ -1068,13 +1110,13 @@ ALTER TABLE `seguimiento`
 -- AUTO_INCREMENT de la tabla `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT de la tabla `user_role`
 --
 ALTER TABLE `user_role`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- Restricciones para tablas volcadas
