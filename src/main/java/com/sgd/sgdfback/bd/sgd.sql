@@ -7,6 +7,9 @@
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.0.28
 
+CREATE DATABASE IF NOT EXISTS `sgd`;
+USE `sgd`;
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";

@@ -1,0 +1,33 @@
+POST  http://127.0.0.1:8081/workflow/inicioFlujo
+//Authorization: Bearer 18|OW2Sx05DeFL0ZyjVYhmV7IK1Hx6OpY7C54O8Wu9J54bb2c02
+Accept: application/json
+Content-Type: application/json
+
+{
+    "flujo": "F1",
+    "tipo": "solicitudCartaRecomendacion"
+}
+
+###
+GET  http://127.0.0.1:8081/workflow/mostrarFormulario
+//Authorization: Bearer 18|OW2Sx05DeFL0ZyjVYhmV7IK1Hx6OpY7C54O8Wu9J54bb2c02
+Accept: application/json
+Content-Type: application/json
+
+{
+    "flujo": "F1",
+    "proceso": "P5"
+}
+
+###
+POST  http://127.0.0.1:8081/workflow/controladorSiguiente
+# Authorization: Bearer 20|iQ185MH8ZwKZZHOVrHmC1jW3oDVonH59yLxH1FOe414a9f36
+Accept: application/json
+Content-Type: application/json
+
+{
+    "flujo": "F1",
+    "proceso": "P2",
+    "tramite_id": "15",
+    "condicion": "no"
+}
